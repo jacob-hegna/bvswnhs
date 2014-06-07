@@ -7,7 +7,6 @@
     <title>BVSW NHS</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
-    <script src="js/jquery-2.1.1.min.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -15,9 +14,13 @@
             <div class="jumbotron">
                 <h2>BVSW NHS <small>Making the world a more honorable place</small></h2>
             </div>
-            <center>
-                <img height="600" src="img/main.jpg">
-            </center>
+            <div id="hour-form" class="input-group input-group-lg">
+                <span class="input-group-addon">Student ID</span>
+                <input id="bvid" class="form-control" autofocus>
+                <span class="input-group-btn">
+                    <button id="hours-submit" class="btn btn-default" type="button">Check</button>
+                </span>
+            </div>
         </div>
     </div>
     <div id="footer">
@@ -25,6 +28,7 @@
             <p class="credit">The BVSW NHS website is being developed by <a href="http://jacob.bvswdebate.com/" target="_blank">Jacob Hegna</a> and <a href="http://github.com/killmous/" target="_blank">Wes Caldwell</a>
         </div>
     </div>
+    <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
