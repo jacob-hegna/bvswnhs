@@ -5,7 +5,7 @@ $(document).ready(function() {
             type: 'post',
             url: 'php/main.php',
             data: {
-                bvid: $(this).data
+                bvid: $('#bvid').val()
             }
         }).done(function(data) {
             alert(data);
