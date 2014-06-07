@@ -1,0 +1,21 @@
+html, body{
+    height: 100%;
+}
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -31px;
+    padding: 0 0 60px;
+}
+#footer {
+    min-height: 30px;
+}
+#creditContainer {
+    width: auto;
+    padding: 0 15px;
+}
+#creditContainer .credit {
+    margin: 5px 0;
+    color: rgb(153, 153, 153);
+}
