@@ -2,6 +2,7 @@
 error_reporting(-1);
 ini_set('display_errors', 'On');
 
+require('config.php');
 require('medoo.min.php');
 require('util.php');
 
