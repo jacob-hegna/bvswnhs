@@ -1,6 +1,6 @@
 <?php
 
-function get_profile() {
+function get_events() {
     $name = Util::getUser($_SESSION['bvid'])['name'];
     $page =
 <<<EOD

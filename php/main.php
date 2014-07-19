@@ -8,6 +8,7 @@ require('config.php');
 require('medoo.min.php');
 require('util.php');
 require('pages/error.php');
+require('pages/events.php');
 require('pages/home.php');
 require('pages/profile.php');
 
@@ -42,6 +43,12 @@ if(array_key_exists('page', $_POST)) {
 				get_error(403);
 			}
 			break;
+		case 'events':
+			if($_SESSION['loggedin']) {
+				get_events();
+			} else {
+				get_error(403);
+			}
 	}
 } else if(array_key_exists('util', $_POST)) {
 	switch($_POST['util']) {
