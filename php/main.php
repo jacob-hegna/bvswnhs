@@ -8,6 +8,7 @@ require('config.php');
 require('medoo.min.php');
 require('util.php');
 require('pages/home.php');
+require('pages/profile.php');
 
 $database = new medoo([
     'database_type' => 'mysql',
@@ -28,6 +29,19 @@ if(array_key_exists('page', $_POST)) {
 	switch($_POST['page']) {
 		case 'home':
 			get_home();
+			break;
+		case 'profile':
+			if($_SESSION['loggedin']) {
+				get_profile();
+			} else {
+				get_error(403);
+			}
+			break;
+	}
+} else if(array_key_exists('util', $_POST)) {
+	switch($_POST['util']) {
+		case 'sign_in':
+			Util::sign_in($_POST['attr']['bvid']);
 			break;
 	}
 }

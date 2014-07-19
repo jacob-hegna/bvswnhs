@@ -1,6 +1,6 @@
 <?php
 
-function get_home() {
+function get_profile() {
     $page =
 <<<EOD
 <script>
@@ -38,7 +38,7 @@ function get_home() {
     <h2><img width="50px" src="img/nhs.png"> BVSW NHS <small>Making the world a more honorable place</small></h2>
 </div>
 <div id="hour-form" class="input-group input-group-lg">
-    <span class="input-group-addon">Student ID</span>
+    <span class="input-group-addon">You are currently logged in</span>
     <input id="bvid" class="form-control" autofocus>
     <span class="input-group-btn">
         <button id="hours-submit" class="btn btn-default" type="button">Check</button>
