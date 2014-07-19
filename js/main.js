@@ -1,14 +1,27 @@
 $(document).ready(function() {
-    $('#hours-submit').on('click', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'post',
-            url: 'php/main.php',
-            data: {
-                bvid: $('#bvid').val()
-            }
-        }).done(function(data) {
-            alert(data);
-        });
+
+    if($.ajax({
+        type: 'post',
+        url: 'php/main.php',
+        data: {
+            util: 'logged_in'
+        },
+        async: false
+    }).responseText == '1') {}
+
+    $.ajax({
+        type: 'post',
+        url: 'php/main.php',
+        data: {
+                page: 'home'
+        }
+    }).done(function(data) {
+        if(data != 'refresh') {
+            $('#main').html(data);
+            console.log(data);
+        } else {
+            window.location('home');
+        }
     });
+
 });
