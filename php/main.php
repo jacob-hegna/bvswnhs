@@ -7,6 +7,7 @@ session_start();
 require('config.php');
 require('medoo.min.php');
 require('util.php');
+require('pages/error.php');
 require('pages/home.php');
 require('pages/profile.php');
 
@@ -28,7 +29,11 @@ if(array_key_exists('bvid', $_POST)) {
 if(array_key_exists('page', $_POST)) {
 	switch($_POST['page']) {
 		case 'home':
-			get_home();
+			if($_SESSION['loggedin']) {
+				get_profile();
+			} else {
+				get_home();
+			}
 			break;
 		case 'profile':
 			if($_SESSION['loggedin']) {
@@ -43,6 +48,12 @@ if(array_key_exists('page', $_POST)) {
 		case 'sign_in':
 			Util::sign_in($_POST['attr']['bvid']);
 			break;
+		case 'sign_out':
+            session_unset();
+            session_destroy();
+            $_SESSION['loggedin'] = false;
+            echo 'refresh';
+            break;
 	}
 }
 ?>

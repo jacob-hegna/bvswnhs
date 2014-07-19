@@ -20,7 +20,7 @@ $(document).ready(function() {
             $('#main').html(data);
             console.log(data);
         } else {
-            window.location('home');
+            window.location('.');
         }
     });
 
