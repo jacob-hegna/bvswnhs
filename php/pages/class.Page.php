@@ -94,7 +94,7 @@ class Page {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a id="nhs" class="navbar-brand" href="#">BVSW NHS</a>
+      <a class="navbar-brand" href="#" id="profile">' . Util::getUser($_SESSION['bvid'])['name'] . '</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
