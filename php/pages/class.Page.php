@@ -7,18 +7,32 @@ class Page {
     private function start() {
         echo '
 <script>
-    $("#profile").on("click", function(e) {
+    $("#nhs").on("click", function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: "/php/main.php",
             data: {
-                page: "profile"
+                page: "home"
             }
         }).done(function(data) {
-            history.pushState({}, "", "/profile/");
+            history.pushState({}, "", "/home/");
             $("#main").html(data);
-            $("#profile").parent().addClass("active");
+            $("#home").parent().addClass("active");
+        });
+    });
+    $("#home").on("click", function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                page: "home"
+            }
+        }).done(function(data) {
+            history.pushState({}, "", "/home/");
+            $("#main").html(data);
+            $("#home").parent().addClass("active");
         });
     });
     $("#events").on("click", function(e) {
@@ -80,17 +94,17 @@ class Page {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">' . Util::getUser($_SESSION['bvid'])['name'] . '</a>
+      <a id="nhs" class="navbar-brand" href="#">BVSW NHS</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" id="profile">Profile</a></li>
+        <li><a href="#" id="home">Home</a></li>
         <li><a href="#" id="events">Events</a></li>
         ' . ((Util::getUser($_SESSION['bvid'])['rank'] == 2) ?
         '<li><a href="#" id="members">Members</a></li>' : '') . '
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="sign_out">Logout</a></li>
+        <li><a href="#" id="sign_out">Logout - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

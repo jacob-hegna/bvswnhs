@@ -38,13 +38,15 @@ function get_home() {
 <div class="jumbotron">
     <h2><img width="50px" src="/img/nhs.png"> BVSW NHS <small>Making the world a more honorable place</small></h2>
 </div>
-<div id="hour-form" class="input-group input-group-lg">
-    <span class="input-group-addon">Student ID</span>
-    <input id="bvid" class="form-control" autofocus>
-    <span class="input-group-btn">
-        <button id="hours-submit" class="btn btn-default" type="button">Login</button>
-    </span>
-</div>
+<form>
+    <div id="hour-form" class="input-group input-group-lg">
+        <span class="input-group-addon">Student ID</span>
+        <input id="bvid" class="form-control" autofocus>
+        <span class="input-group-btn">
+            <button id="hours-submit" class="btn btn-default" type="submit" type="button">Login</button>
+        </span>
+    </div>
+</form>
 EOD;
     echo $page;
 }
