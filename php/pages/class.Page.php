@@ -11,11 +11,12 @@ class Page {
         e.preventDefault();
         $.ajax({
             type: "post",
-            url: "php/main.php",
+            url: "/php/main.php",
             data: {
                 page: "profile"
             }
         }).done(function(data) {
+            history.pushState({}, "", "/profile/");
             $("#main").html(data);
             $("#profile").parent().addClass("active");
         });
@@ -24,11 +25,12 @@ class Page {
         e.preventDefault();
         $.ajax({
             type: "post",
-            url: "php/main.php",
+            url: "/php/main.php",
             data: {
                 page: "events"
             }
         }).done(function(data) {
+            history.pushState({}, "", "/events/");
             $("#main").html(data);
             $("#events").parent().addClass("active");
         });
@@ -37,11 +39,12 @@ class Page {
         e.preventDefault();
         $.ajax({
             type: "post",
-            url: "php/main.php",
+            url: "/php/main.php",
             data: {
                 page: "members"
             }
         }).done(function(data) {
+            history.pushState({}, "", "/members/");
             $("#main").html(data);
             $("#members").parent().addClass("active");
         });
@@ -50,19 +53,20 @@ class Page {
         e.preventDefault();
         $.ajax({
             type: "post",
-            url: "php/main.php",
+            url: "/php/main.php",
             data: {
                 util: "sign_out"
             }
         }).done(function(data) {
             $.ajax({
                 type: "post",
-                url: "php/main.php",
+                url: "/php/main.php",
                 data: {
                     page: "home"
                 }
             }).done(function(data) {
                 $("#main").html(data);
+                history.pushState({}, "", "/home/");
             });
         });
     });

@@ -63,6 +63,9 @@ if(array_key_exists('page', $_POST)) {
                 get_error(403);
             }
             break;
+        default:
+            get_error(404);
+            break;
 	}
 } else if(array_key_exists('util', $_POST)) {
 	switch($_POST['util']) {
