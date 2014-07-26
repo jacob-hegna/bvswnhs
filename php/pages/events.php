@@ -14,6 +14,7 @@ function get_events() {
             }
         }).done(function(data) {
             $('#main').html(data);
+            $('#profile').parent().addClass('active');
         });
     });
     $('#events').on('click', function(e) {
@@ -25,6 +26,7 @@ function get_events() {
             }
         }).done(function(data) {
             $('#main').html(data);
+            $('#profile').parent().addClass('active');
         });
     })
     $('#sign_out').on('click', function(e) {
@@ -60,11 +62,11 @@ function get_events() {
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#" id="profile">Profile</a></li>
-        <li class="active"><a href="#" id="events">Events</a></li>
+        <li><a href="#" id="profile">Profile</a></li>
+        <li><a href="#" id="events">Events</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#" id="sign_out">Logout</a></li>
+        <li><a href="#" id="sign_out">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
