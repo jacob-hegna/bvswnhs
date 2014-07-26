@@ -1,53 +1,52 @@
 <?php
 
 function get_profile() {
-    $name = Util::getUser($_SESSION['bvid'])['name'];
     $page =
-<<<EOD
+'
 <script>
-    $('#profile').on('click', function(e) {
+    $("#profile").on("click", function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'post',
-            url: 'php/main.php',
+            type: "post",
+            url: "php/main.php",
             data: {
                 page: "profile"
             }
         }).done(function(data) {
-            $('#main').html(data);
-            $('#profile').parent().addClass('active');
+            $("#main").html(data);
+            $("#profile").parent().addClass("active");
         });
     });
-    $('#events').on('click', function(e) {
+    $("#events").on("click", function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'post',
-            url: 'php/main.php',
+            type: "post",
+            url: "php/main.php",
             data: {
                 page: "events"
             }
         }).done(function(data) {
-            $('#main').html(data);
-            $('#events').parent().addClass('active');
+            $("#main").html(data);
+            $("#events").parent().addClass("active");
         });
     });
-    $('#sign_out').on('click', function(e) {
+    $("#sign_out").on("click", function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'post',
-            url: 'php/main.php',
+            type: "post",
+            url: "php/main.php",
             data: {
                 util: "sign_out"
             }
         }).done(function(data) {
             $.ajax({
-                type: 'post',
-                url: 'php/main.php',
+                type: "post",
+                url: "php/main.php",
                 data: {
                     page: "home"
                 }
             }).done(function(data) {
-                $('#main').html(data);
+                $("#main").html(data);
             });
         });
     });
@@ -61,7 +60,7 @@ function get_profile() {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">$name</a>
+      <a class="navbar-brand" href="#">' . Util::getUser($_SESSION['bvid'])['name'] . '</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -74,7 +73,12 @@ function get_profile() {
     </div><!--/.nav-collapse -->
   </div>
 </div>
-EOD;
+<div class="jumbotron">
+    <br>
+    <center>
+        <p>Hours: ' . Util::getUser($_SESSION['bvid'])['hours'] . '</p>
+    </center>
+</div>';
     echo $page;
 }
 
