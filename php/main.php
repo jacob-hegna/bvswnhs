@@ -1,12 +1,13 @@
 <?php
 error_reporting(-1);
-ini_set('display_errors', 'On');
+ini_set('display_errors', 'Off');
 
 session_start();
 
 require('config.php');
 require('medoo.min.php');
 require('util.php');
+require('pages/class.Page.php');
 require('pages/error.php');
 require('pages/events.php');
 require('pages/home.php');
