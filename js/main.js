@@ -1,26 +1,23 @@
 $(document).ready(function() {
+    var url  = $.url();
+    var p    = url.segment(1);
 
-    if($.ajax({
-        type: 'post',
-        url: 'php/main.php',
-        data: {
-            util: 'logged_in'
-        },
-        async: false
-    }).responseText == '1') {}
+    if(p == '') {
+        history.pushState({}, "", "/home/");
+        p = "home";
+    }
 
     $.ajax({
         type: 'post',
-        url: 'php/main.php',
+        url: '/php/main.php',
         data: {
-                page: 'home'
+                page: p
         }
     }).done(function(data) {
         if(data != 'refresh') {
             $('#main').html(data);
-            console.log(data);
         } else {
-            window.location('.');
+
         }
     });
 

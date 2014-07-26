@@ -9,7 +9,7 @@ function get_home() {
         if(/[0-9]{8}/.test($('#bvid').val())) {
             $.ajax({
                 type: 'post',
-                url: 'php/main.php',
+                url: '/php/main.php',
                 data: {
                     util: "sign_in",
                     attr: {
@@ -20,7 +20,7 @@ function get_home() {
                 if(data == "success") {
                     $.ajax({
                         type: 'post',
-                        url: 'php/main.php',
+                        url: '/php/main.php',
                         data: {
                             page: "profile"
                         }
@@ -36,7 +36,7 @@ function get_home() {
 </script>
 <a href="https://github.com/jacob-hegna/bvswnhs" target="_blank"><img style="position:absolute;top:0;right:0;" src="img/github.png" alt="Fork me on GitHub"></a>
 <div class="jumbotron">
-    <h2><img width="50px" src="img/nhs.png"> BVSW NHS <small>Making the world a more honorable place</small></h2>
+    <h2><img width="50px" src="/img/nhs.png"> BVSW NHS <small>Making the world a more honorable place</small></h2>
 </div>
 <div id="hour-form" class="input-group input-group-lg">
     <span class="input-group-addon">Student ID</span>
