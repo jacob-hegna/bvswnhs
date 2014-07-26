@@ -1,7 +1,8 @@
 <?php
-
 function get_profile() {
-    Page::write("asdf");
+    Page::write('
+<br>
+<p>Hours: ' . Util::getUser($_SESSION['bvid'])['hours'] . '</p>
+    ');
 }
-
 ?>

@@ -9,6 +9,7 @@ require('medoo.min.php');
 require('util.php');
 require('pages/class.Page.php');
 require('pages/error.php');
+require('pages/members.php');
 require('pages/events.php');
 require('pages/home.php');
 require('pages/profile.php');
@@ -50,6 +51,18 @@ if(array_key_exists('page', $_POST)) {
 			} else {
 				get_error(403);
 			}
+            break;
+        case 'members':
+            if($_SESSION['loggedin']) {
+                if(Util::getUser($_SESSION['bvid'])['rank'] == 2) {
+                    get_members();
+                } else {
+                    get_error(403);
+                }
+            } else {
+                get_error(403);
+            }
+            break;
 	}
 } else if(array_key_exists('util', $_POST)) {
 	switch($_POST['util']) {

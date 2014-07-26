@@ -13,10 +13,7 @@ function get_error($code) {
     $page = '
 <div class="jumbotron">
     <p>Error ('.$code.'): '.$details.'</p>
-</div>
-<center>
-    <img class="animated fadeInDown" src="/static/img/404.jpg" width="400px"</img>
-</center>';
-    echo $page;
+</div>';
+    Page::write($page);
 }
 ?>
