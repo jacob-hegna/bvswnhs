@@ -33,6 +33,19 @@ class Page {
             $("#events").parent().addClass("active");
         });
     });
+    $("#members").on("click", function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "php/main.php",
+            data: {
+                page: "members"
+            }
+        }).done(function(data) {
+            $("#main").html(data);
+            $("#members").parent().addClass("active");
+        });
+    });
     $("#sign_out").on("click", function(e) {
         e.preventDefault();
         $.ajax({
@@ -69,6 +82,8 @@ class Page {
       <ul class="nav navbar-nav">
         <li><a href="#" id="profile">Profile</a></li>
         <li><a href="#" id="events">Events</a></li>
+        ' . ((Util::getUser($_SESSION['bvid'])['rank'] == 2) ?
+        '<li><a href="#" id="members">Members</a></li>' : '') . '
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" id="sign_out">Logout</a></li>
