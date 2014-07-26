@@ -69,6 +69,12 @@ if(array_key_exists('page', $_POST)) {
 	}
 } else if(array_key_exists('util', $_POST)) {
 	switch($_POST['util']) {
+        case 'add_event':
+            Util::add_event($_POST['attr']);
+            break;
+        case 'remove_event':
+            Util::remove_event($_POST['attr']['id']);
+            break;
 		case 'sign_in':
 			Util::sign_in($_POST['attr']['bvid']);
 			break;
