@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `hours` varchar(2) NOT NULL,
-  `date` int(25) NOT NULL,
+  `date` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `bvid` varchar(8) NOT NULL,
   `hours` int(11) NOT NULL,
   `rank` int(1) NOT NULL DEFAULT '0',
+  `events` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
