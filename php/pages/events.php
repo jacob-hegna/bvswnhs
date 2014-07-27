@@ -3,6 +3,7 @@ function get_events() {
     global $database;
     $page = '
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
+<h1 style="text-align: center">Events</h1>
     <thead>
         <th>Event</th>
         <th>Possible hours</th>

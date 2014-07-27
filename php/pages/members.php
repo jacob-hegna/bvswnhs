@@ -2,6 +2,7 @@
 function get_members() {
     global $database;
     $page = '
+<h1 style="text-align: center">Members</h1>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
     <thead>
         <th>Name</th>

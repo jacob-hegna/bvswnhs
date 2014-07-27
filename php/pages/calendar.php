@@ -1,6 +1,8 @@
 <?php
 function get_cal() {
     $page = '
+<h1 style="text-align: center">Calendar</h1>
+<br>
 <div id="calendar-div"></div>
 <script type="text/javascript">
         var calendar = $("#calendar-div").calendar(
