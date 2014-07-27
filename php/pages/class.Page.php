@@ -7,20 +7,6 @@ class Page {
     private function start() {
         echo '
 <script>
-    $("#nhs").on("click", function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "home"
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/home/");
-            $("#main").html(data);
-            $("#home").parent().addClass("active");
-        });
-    });
     $("#home").on("click", function(e) {
         e.preventDefault();
         $.ajax({
