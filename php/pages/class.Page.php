@@ -7,8 +7,11 @@ class Page {
     private function start() {
         echo '
 <script>
+    $("#loadbar").loadie();
     $("#home").on("click", function(e) {
         e.preventDefault();
+        $("#loadbar").loadie(.1);
+        $(".loadie").fadeIn();
         $.ajax({
             type: "post",
             url: "/php/main.php",
@@ -19,10 +22,15 @@ class Page {
             history.pushState({}, "", "/home/");
             $("#main").html(data);
             $("#home").parent().addClass("active");
+            setTimeout(function() {
+                $("#loadbar").loadie(1);
+            }, 100)
         });
     });
     $("#events").on("click", function(e) {
         e.preventDefault();
+        $("#loadbar").loadie(.1);
+        $(".loadie").fadeIn();
         $.ajax({
             type: "post",
             url: "/php/main.php",
@@ -33,10 +41,15 @@ class Page {
             history.pushState({}, "", "/events/");
             $("#main").html(data);
             $("#events").parent().addClass("active");
+            setTimeout(function() {
+                $("#loadbar").loadie(1);
+            }, 100)
         });
     });
     $("#members").on("click", function(e) {
         e.preventDefault();
+        $("#loadbar").loadie(.1);
+        $(".loadie").fadeIn();
         $.ajax({
             type: "post",
             url: "/php/main.php",
@@ -47,10 +60,15 @@ class Page {
             history.pushState({}, "", "/members/");
             $("#main").html(data);
             $("#members").parent().addClass("active");
+            setTimeout(function() {
+                $("#loadbar").loadie(1);
+            }, 100)
         });
     });
     $("#calendar").on("click", function(e) {
         e.preventDefault();
+        $("#loadbar").loadie(.1);
+        $(".loadie").fadeIn();
         $.ajax({
             type: "post",
             url: "/php/main.php",
@@ -61,6 +79,9 @@ class Page {
             history.pushState({}, "", "/calendar/");
             $("#main").html(data);
             $("#calendar").parent().addClass("active");
+            setTimeout(function() {
+                $("#loadbar").loadie(1);
+            }, 200)
         });
     });
     $("#sign_out").on("click", function(e) {
@@ -86,6 +107,7 @@ class Page {
     });
 </script>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div style="z-index:99;" id="loadbar"></div>
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
