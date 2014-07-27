@@ -30,5 +30,19 @@ class Util {
         global $database;
         $database->delete('events', ['id' => $id]);
     }
+
+    public static function add_user($attr) {
+        global $database;
+        $database->insert('members', [
+            'name' => $attr['name'],
+            'hours' => $attr['hours'],
+            'bvid' => $attr['bvid']
+        ]);
+    }
+
+    public static function remove_user($id) {
+        global $database;
+        $database->delete('members', ['bvid' => $id]);
+    }
 }
 ?>
