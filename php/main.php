@@ -70,16 +70,32 @@ if(array_key_exists('page', $_POST)) {
 } else if(array_key_exists('util', $_POST)) {
 	switch($_POST['util']) {
         case 'add_event':
-            Util::add_event($_POST['attr']);
+            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                Util::add_event($_POST['attr']);
+            } else {
+                get_error(403);
+            }
             break;
         case 'remove_event':
-            Util::remove_event($_POST['attr']['id']);
+            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                Util::remove_event($_POST['attr']['id']);
+            } else {
+                get_error(403);
+            }
             break;
         case 'add_user':
-            Util::add_user($_POST['attr']);
+            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                Util::add_user($_POST['attr']);
+            } else {
+                get_error(403);
+            }
             break;
         case 'remove_user':
-            Util::remove_user($_POST['attr']['id']);
+            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                Util::remove_user($_POST['attr']['id']);
+            } else {
+                get_error(403);
+            }
             break;
 		case 'sign_in':
 			Util::sign_in($_POST['attr']['bvid']);

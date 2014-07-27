@@ -9,16 +9,18 @@ function get_events() {
         <th>Date</th>
     </thread>
     <tbody>';
+
     foreach($database->select('events', '*') as $i) {
         $page .= '
         <tr>
             <td>' . $i['name']  . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
-            <td><button id="'.$i['id'].'" class="remove-event btn btn-danger btn-sm">Remove</button></td>
+            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="remove-event btn btn-danger btn-sm">Remove</button></td>' : '') . '
         </tr>';
     }
-    $page .= '
+    if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+        $page .= '
         <tr>
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="hour-box" class="form-control" placeholder="Possible Hour(s)" required=""></td>
@@ -75,7 +77,9 @@ function get_events() {
                     });
                 });
             });
-        </script>
+        </script>';
+    }
+    $page .= '
     </tbody>
 </table>';
     Page::write($page);

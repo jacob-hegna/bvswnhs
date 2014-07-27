@@ -11,9 +11,21 @@ function get_members() {
     <tbody>';
 
     foreach($database->select('members', '*') as $i) {
+        $rankColor;
+        switch($i['rank']) {
+            case 0:
+                $rankColor = 'success';
+                break;
+            case 1:
+                $rankColor = 'primary';
+                break;
+            case 2:
+                $rankColor = 'danger';
+                break;
+        }
         $page .= '
         <tr>
-            <td>' . $i['name']  . '</td>
+            <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getCUser()['rank']).'</span> </td>
             <td>' . $i['bvid']  . '</td>
             <td>' . $i['hours'] . '</td>
             <td><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm">Remove</button></td>
@@ -24,7 +36,7 @@ function get_members() {
         <tr>
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="bvid-box" class="form-control" placeholder="BV ID" required=""></td>
-            <td><input id="hour-box" class="form-control" placeholder="Date" required=""></td>
+            <td><input id="hour-box" class="form-control" placeholder="Hours" required=""></td>
             <td><button id="add-user" class="btn btn-primary btn-sm">Submit</button></td>
         </tr>
         <script>

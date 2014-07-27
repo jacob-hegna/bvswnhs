@@ -5,6 +5,12 @@ class Util {
         return $database->get('members', '*', ['bvid' => $id]);
     }
 
+    // current user
+    public static function getCUser() {
+        global $database;
+        return Util::getUser($_SESSION['bvid']);
+    }
+
     public static function sign_in($bvid) {
         global $database;
 
@@ -44,5 +50,25 @@ class Util {
         global $database;
         $database->delete('members', ['bvid' => $id]);
     }
+
+    public static function getRank($rankNum) {
+        $rankStr;
+        switch ($rankNum) {
+            case 0:
+                $rankStr = "Member";
+                break;
+            case 1:
+                $rankStr = "Officer";
+                break;
+            case 2:
+                $rankStr = "Site Admin";
+                break;
+            default:
+                $rankStr = "N/A";
+                break;
+        }
+        return $rankStr;
+    }
+
 }
 ?>
