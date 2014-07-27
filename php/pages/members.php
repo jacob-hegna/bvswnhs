@@ -25,7 +25,7 @@ function get_members() {
         }
         $page .= '
         <tr>
-            <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getCUser()['rank']).'</span> </td>
+            <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getUser($i['bvid'])['rank']).'</span> </td>
             <td>' . $i['bvid']  . '</td>
             <td>' . $i['hours'] . '</td>
             <td><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm">Remove</button></td>
