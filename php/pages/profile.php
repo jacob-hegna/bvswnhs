@@ -1,9 +1,14 @@
 <?php
 function get_profile() {
     global $database;
+    $myevents = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
+    $events = array_map(function($eventid) {
+        global $database;
+        return $database->get('events', '*', ['id' => $eventid]);
+    }, $myevents);
     $page = '
 <div class="container">
-    <h1 style="text-align: center">' . Util::getUser($_SESSION['bvid'])['hours'] . ' Hours Logged</h1><br />
+    <h1 style="text-align: center">' . Util::getCUser()['hours'] . ' Hours Logged</h1><br />
     <div>
         <ul id="myTab" class="nav nav-tabs">
             <li class="active"><a href="#current" data-toggle="tab">Current Events</a></li>
@@ -21,14 +26,14 @@ function get_profile() {
                     </thead>
                     <tbody>
 ';
-    $myevents = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
-    foreach ($myevents as $i) {
-        $events = $database->get('events', '*', ['id' => $i]);
+    foreach (array_filter($events, function($event) {
+        return strtotime($event['date']) >= strtotime('+1 day', strtotime(date("Y-m-d")));
+    }) as $i) {
         $page .= '
                 <tr>
-                    <td>'.$events['name'] .'</td>
-                    <td>'.$events['hours'].'</td>
-                    <td>'.$events['date'] .'</td>
+                    <td>'.$i['name'] .'</td>
+                    <td>'.$i['hours'].'</td>
+                    <td>'.$i['date'] .'</td>
                 </tr>
 ';
     }
@@ -37,7 +42,28 @@ function get_profile() {
                 </table>
             </div>
             <div class="tab-pane fade" id="past">
-                <p>Nothing has happened yet!</p>
+                <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Hours</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+';
+    foreach (array_filter($events, function($event) {
+        return strtotime($event['date']) < strtotime('+1 day', strtotime(date("Y-m-d")));
+    }) as $i) {
+        $page .= '
+                <tr>
+                    <td>'.$i['name'] .'</td>
+                    <td>'.$i['hours'].'</td>
+                    <td>'.$i['date'] .'</td>
+                </tr>
+';
+    }
+    $page .= '
             </div>
         </div>
     </div>
