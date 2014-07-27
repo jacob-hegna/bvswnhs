@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `bvid` varchar(8) NOT NULL,
   `hours` int(11) NOT NULL,
   `rank` int(1) NOT NULL DEFAULT '0',
-  `events` varchar(512) NOT NULL,
+  `events` varchar(512) NOT NULL DEFAULT '[]',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
