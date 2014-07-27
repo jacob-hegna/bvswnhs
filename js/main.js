@@ -16,6 +16,9 @@ $(document).ready(function() {
     }).done(function(data) {
         if(data != 'refresh') {
             $('#main').html(data);
+            if(p == 'home') {
+                $('#home').parent().addClass('active');
+            }
         } else {
 
         }
