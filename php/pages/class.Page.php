@@ -80,7 +80,7 @@ class Page {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">' . Util::getUser($_SESSION['bvid'])['name'] . '</a>
+      <a class="navbar-brand" href="#" id="profile">' . Util::getUser($_SESSION['bvid'])['name'] . '</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
