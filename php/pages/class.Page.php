@@ -109,7 +109,7 @@ class Page {
     </div><!--/.nav-collapse -->
   </div>
 </div>
-<div class="jumbotron">
+<div class="jumbotron" style="margin-top: 75px">
 ';
     }
 
