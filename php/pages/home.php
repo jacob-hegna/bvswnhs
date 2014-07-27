@@ -43,7 +43,7 @@ function get_home() {
         <span class="input-group-addon">Student ID</span>
         <input id="bvid" class="form-control" autofocus>
         <span class="input-group-btn">
-            <button id="hours-submit" class="btn btn-default" type="submit" type="button">Login</button>
+            <button id="hours-submit" class="btn btn-default" type="submit" type="button">Login <i class="fa fa-sign-in"></i></button>
         </span>
     </div>
 </form>

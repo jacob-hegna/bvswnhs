@@ -80,7 +80,7 @@ class Page {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">BVSW NHS</a>
+      <a id="logo" class="navbar-brand animated fadeInLeft">BVSW NHS <img width="20px" src="/img/nhs-white.png"></a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -90,7 +90,7 @@ class Page {
         '<li><a href="#" id="members">Members</a></li>' : '') . '
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="sign_out">Logout - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>
+        <li><a href="#" id="sign_out">Logout <i class="fa fa-sign-out"></i> - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
