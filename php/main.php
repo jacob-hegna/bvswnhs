@@ -22,7 +22,9 @@ $database = new medoo([
     'username' => SERVER_USER,
     'password' => SERVER_PASS]);
 
-if($_SERVER['REQUEST_METHOD'] === 'GET') {
+if($_SERVER['REQUEST_METHOD'] === 'GET' && array_key_exists('from', $_GET) && array_key_exists('to', $_GET)) {
+    echo Util::get_cal_events();
+} else {
     echo
 '<html>
 <body>
@@ -37,10 +39,6 @@ if(!array_key_exists('loggedin', $_SESSION)) {
 
 if(array_key_exists('bvid', $_POST)) {
     echo Util::getUser($_POST['bvid'])['hours'];
-}
-
-if(array_key_exists('from', $_GET) && array_key_exists('to', $_GET)) {
-    echo Util::get_cal_events();
 }
 
 if(array_key_exists('page', $_POST)) {
