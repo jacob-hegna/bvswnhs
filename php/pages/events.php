@@ -8,7 +8,7 @@ function get_events() {
         <th>Event</th>
         <th>Possible hours</th>
         <th>Date</th>' . (Util::getUser($_SESSION['bvid'])['rank'] >= 1 ?
-        '<th><button id="admin" class="btn btn-primary btn-sm">Admin<span class="glyphicon glyphicon-pencil"></span></button></th>':'') .
+        '<th><button id="admin" class="btn btn-primary btn-sm">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
 
