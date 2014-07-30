@@ -31,27 +31,27 @@ if(array_key_exists('bvid', $_POST)) {
 }
 
 if(array_key_exists('page', $_POST)) {
-	switch($_POST['page']) {
-		case 'home':
-			if($_SESSION['loggedin']) {
-				get_profile();
-			} else {
-				get_home();
-			}
-			break;
-		case 'profile':
-			if($_SESSION['loggedin']) {
-				get_profile();
-			} else {
-				get_error(403);
-			}
-			break;
-		case 'events':
-			if($_SESSION['loggedin']) {
-				get_events();
-			} else {
-				get_error(403);
-			}
+    switch($_POST['page']) {
+        case 'home':
+            if($_SESSION['loggedin']) {
+                get_profile();
+            } else {
+                get_home();
+            }
+            break;
+        case 'profile':
+            if($_SESSION['loggedin']) {
+                get_profile();
+            } else {
+                get_error(403);
+            }
+            break;
+        case 'events':
+            if($_SESSION['loggedin']) {
+                get_events();
+            } else {
+                get_error(403);
+            }
             break;
         case 'calendar':
             if($_SESSION['loggedin']) {
@@ -74,9 +74,9 @@ if(array_key_exists('page', $_POST)) {
         default:
             get_error(404);
             break;
-	}
+    }
 } else if(array_key_exists('util', $_POST)) {
-	switch($_POST['util']) {
+    switch($_POST['util']) {
         case 'add_event':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::add_event($_POST['attr']);
@@ -90,6 +90,9 @@ if(array_key_exists('page', $_POST)) {
             } else {
                 get_error(403);
             }
+            break;
+        case 'join_event':
+            Util::join_event($_POST['attr']['id']);
             break;
         case 'add_user':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
@@ -105,15 +108,15 @@ if(array_key_exists('page', $_POST)) {
                 get_error(403);
             }
             break;
-		case 'sign_in':
-			Util::sign_in($_POST['attr']['bvid']);
-			break;
-		case 'sign_out':
+        case 'sign_in':
+            Util::sign_in($_POST['attr']['bvid']);
+            break;
+        case 'sign_out':
             session_unset();
             session_destroy();
             $_SESSION['loggedin'] = false;
             echo 'refresh';
             break;
-	}
+    }
 }
 ?>
