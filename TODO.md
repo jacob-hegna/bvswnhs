@@ -1,5 +1,6 @@
 ## To-do
 - email alerts
+- ~~do this for wes~~
 - ~~loadie.js~~
 - calendar for meetings and events
 - sign up for events
