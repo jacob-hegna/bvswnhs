@@ -37,6 +37,15 @@ class Util {
         $database->delete('events', ['id' => $id]);
     }
 
+    public static function join_event($id) {
+        global $database;
+        $events = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
+        if(!in_array($id, $events)) { //Only if not already subscribed
+            $events[] = $id;
+            $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
+        }
+    }
+
     public static function add_user($attr) {
         global $database;
         $database->insert('members', [
