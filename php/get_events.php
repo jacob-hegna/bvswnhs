@@ -16,7 +16,7 @@ foreach($database->select('events', '*') as $i) {
         'id' => $i['id'],
         'title' => $i['name'],
         'class' => 'event-important',
-        'start' => (strtotime($i['date']) . '000') + 86400000
+        'start' => (strtotime($i['date']) . '000')
     );
 }
 echo json_encode(array(
