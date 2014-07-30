@@ -29,7 +29,7 @@ function get_members() {
             <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getUser($i['bvid'])['rank']).'</span></td>
             <td style="vertical-align:middle;">' . $i['bvid']  . '</td>
             <td style="vertical-align:middle;">' . $i['hours'] . '</td>
-            <td style="vertical-align:middle;"><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm">Remove</button></td>
+            <td style="vertical-align:middle;"><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm form-control">Remove</button></td>
         </tr>';
     }
 
@@ -38,7 +38,7 @@ function get_members() {
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="bvid-box" class="form-control" placeholder="BV ID" required=""></td>
             <td><input id="hour-box" class="form-control" placeholder="Hours" required=""></td>
-            <td><button id="add-user" class="btn btn-primary btn-sm">Submit</button></td>
+            <td><button id="add-user" class="btn btn-primary btn-sm form-control">Submit</button></td>
         </tr>
         <script>
             $("#add-user").on("click", function(e) {

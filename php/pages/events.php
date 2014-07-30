@@ -8,7 +8,7 @@ function get_events() {
         <th>Event</th>
         <th>Possible hours</th>
         <th>Date</th>' . (Util::getUser($_SESSION['bvid'])['rank'] >= 1 ?
-        '<th><button id="admin" class="btn btn-primary btn-sm">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
+        '<th><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
 
@@ -18,7 +18,7 @@ function get_events() {
             <td>' . $i['name']  . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
-            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="remove-event btn btn-danger btn-sm">Remove</button></td>' : '') . '
+            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="remove-event btn btn-danger btn-sm form-control">Remove</button></td>' : '') . '
         </tr>';
     }
     if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
@@ -27,7 +27,7 @@ function get_events() {
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="hour-box" class="form-control" placeholder="Possible Hour(s)" required=""></td>
             <td><input id="date-box" class="form-control" placeholder="Date" required=""></td>
-            <td><button id="add-event" class="btn btn-primary btn-sm">Submit</button></td>
+            <td><button id="add-event" class="btn btn-primary btn-sm form-control">Submit</button></td>
         </tr>
         <script>
 initAdminCtrls = function() {
