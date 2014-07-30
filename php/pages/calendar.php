@@ -5,12 +5,12 @@ function get_cal() {
 <br>
 <div id="calendar-div"></div>
 <script type="text/javascript">
-        var calendar = $("#calendar-div").calendar(
-            {
-                tmpl_path: "/tmpls/",
-                events_source: function () { return []; }
-            });
-    </script>
+    var calendar = $("#calendar-div").calendar(
+        {
+            tmpl_path: "/tmpls/",
+            events_source: "/php/get_events.php"
+        });
+</script>
 ';
     Page::Write($page);
 }
