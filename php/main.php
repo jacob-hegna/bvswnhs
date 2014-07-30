@@ -22,12 +22,25 @@ $database = new medoo([
     'username' => SERVER_USER,
     'password' => SERVER_PASS]);
 
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo
+'<html>
+<body>
+Fuckin\' clever, but this is off limits
+</body>
+</html>';
+}
+
 if(!array_key_exists('loggedin', $_SESSION)) {
     $_SESSION['loggedin'] = false;
 }
 
 if(array_key_exists('bvid', $_POST)) {
     echo Util::getUser($_POST['bvid'])['hours'];
+}
+
+if(array_key_exists('from', $_GET) && array_key_exists('to', $_GET)) {
+    echo Util::get_cal_events();
 }
 
 if(array_key_exists('page', $_POST)) {
@@ -77,6 +90,9 @@ if(array_key_exists('page', $_POST)) {
     }
 } else if(array_key_exists('util', $_POST)) {
     switch($_POST['util']) {
+        case 'cal_events':
+            Util::get_cal_events();
+            break;
         case 'add_event':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::add_event($_POST['attr']);

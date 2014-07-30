@@ -1,5 +1,22 @@
 <?php
 class Util {
+    public static function get_cal_events() {
+        global $database;
+        $events = array();
+        foreach($database->select('events', '*') as $i) {
+            $events[] = array(
+                'id' => $i['id'],
+                'title' => $i['name'],
+                'class' => 'event-important',
+                'start' => (strtotime($i['date']) . '000')
+            );
+        }
+        return json_encode(array(
+            'success' => 1,
+            'result' => $events
+        ));
+    }
+
     public static function getUser($id) {
         global $database;
         return $database->get('members', '*', ['bvid' => $id]);
