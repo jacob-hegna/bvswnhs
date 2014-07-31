@@ -20,6 +20,6 @@ function sendMail($to, $subject, $message) {
       "Subject" => $subject
     );
 
-    $mail = $smtp->send($to, $headers, $msg);
+    $mail = $smtp->send($to, $headers, $message);
 }
 ?>

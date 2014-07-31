@@ -16,17 +16,15 @@ function getBlast() {
                 }
             }
         }).done(function(data) {
-            if(data == "success") {
-                $.ajax({
-                    type: "post",
-                    url: "/php/main.php",
-                    data: {
-                        page: "home"
-                    }
-                }).done(function(data) {
-                    $("#main").html(data);
-                });
-            }
+            $.ajax({
+                type: "post",
+                url: "/php/main.php",
+                data: {
+                    page: "home"
+                }
+            }).done(function(data) {
+                $("#main").html(data);
+            });
         });
     });
 </script>
