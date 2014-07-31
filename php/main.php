@@ -22,15 +22,9 @@ $database = new medoo([
     'username' => SERVER_USER,
     'password' => SERVER_PASS]);
 
-if($_SERVER['REQUEST_METHOD'] === 'GET' && array_key_exists('from', $_GET) && array_key_exists('to', $_GET)) {
+if(array_key_exists('from', $_GET) &&
+    array_key_exists('to', $_GET)) {
     echo Util::get_cal_events();
-} else {
-    echo
-'<html>
-<body>
-Fuckin\' clever, but this is off limits
-</body>
-</html>';
 }
 
 if(!array_key_exists('loggedin', $_SESSION)) {
