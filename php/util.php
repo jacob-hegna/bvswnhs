@@ -1,5 +1,12 @@
 <?php
 class Util {
+    public static function emailBlast($attr) {
+        global $database;
+        foreach($database->select('members', '*') as $i) {
+            mail($i['email'], $attr['subject'], $attr['message']);
+        }
+    }
+
     public static function get_cal_events() {
         global $database;
         $events = array();
@@ -67,6 +74,7 @@ class Util {
         global $database;
         $database->insert('members', [
             'name' => $attr['name'],
+            'email' => $attr['email'],
             'hours' => $attr['hours'],
             'bvid' => $attr['bvid']
         ]);

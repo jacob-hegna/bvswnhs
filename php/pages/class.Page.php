@@ -65,6 +65,25 @@ class Page {
             }, 100)
         });
     });
+    $("#blast").on("click", function(e) {
+        e.preventDefault();
+        $("#loadbar").loadie(.1);
+        $(".loadie").fadeIn();
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                page: "blast"
+            }
+        }).done(function(data) {
+            history.pushState({}, "", "/blast/");
+            $("#main").html(data);
+            $("#blast").parent().addClass("active");
+            setTimeout(function() {
+                $("#loadbar").loadie(1);
+            }, 100)
+        });
+    });
     $("#calendar").on("click", function(e) {
         e.preventDefault();
         $("#loadbar").loadie(.1);
@@ -124,7 +143,8 @@ class Page {
         <li><a href="#" id="events">Events</a></li>
         <li><a href="#" id="calendar">Calendar</a></li>
         ' . ((Util::getUser($_SESSION['bvid'])['rank'] == 2) ?
-        '<li><a href="#" id="members">Members</a></li>' : '') . '
+        '<li><a href="#" id="members">Members</a></li>
+        <li><a href="#" id="blast">Email Blast</a></li>' : '') . '
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" id="sign_out">Logout <i class="fa fa-sign-out"></i> - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>

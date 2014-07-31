@@ -6,6 +6,7 @@ function get_members() {
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
     <thead>
         <th>Name</th>
+        <th>Email</th>
         <th>BV ID</th>
         <th>Hours</th>
     </thread>
@@ -27,15 +28,17 @@ function get_members() {
         $page .= '
         <tr>
             <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getUser($i['bvid'])['rank']).'</span></td>
-            <td style="vertical-align:middle;">' . $i['bvid']  . '</td>
-            <td style="vertical-align:middle;">' . $i['hours'] . '</td>
-            <td style="vertical-align:middle;"><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm form-control">Remove</button></td>
+            <td>' . $i['email']  . '</td>
+            <td>' . $i['bvid'] . '</td>
+            <td>' . $i['hours'] . '</td>
+            <td><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm form-control">Remove</button></td>
         </tr>';
     }
 
     $page .= '
         <tr>
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
+            <td><input id="email-box" class="form-control" placeholder="Email" required=""></td>
             <td><input id="bvid-box" class="form-control" placeholder="BV ID" required=""></td>
             <td><input id="hour-box" class="form-control" placeholder="Hours" required=""></td>
             <td><button id="add-user" class="btn btn-primary btn-sm form-control">Submit</button></td>
@@ -50,6 +53,7 @@ function get_members() {
                         util: "add_user",
                         attr: {
                             name: $("#name-box").val(),
+                            email: $("#email-box").val(),
                             bvid: $("#bvid-box").val(),
                             hours: $("#hour-box").val()
                         }

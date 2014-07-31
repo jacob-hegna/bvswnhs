@@ -7,11 +7,13 @@ session_start();
 require('config.php');
 require('medoo.min.php');
 require('util.php');
+require('sendMail.php');
 require('pages/class.Page.php');
 require('pages/error.php');
 require('pages/members.php');
 require('pages/events.php');
 require('pages/calendar.php');
+require('pages/blast.php');
 require('pages/home.php');
 require('pages/profile.php');
 
@@ -67,8 +69,19 @@ if(array_key_exists('page', $_POST)) {
             break;
         case 'members':
             if($_SESSION['loggedin']) {
-                if(Util::getUser($_SESSION['bvid'])['rank'] == 2) {
+                if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                     get_members();
+                } else {
+                    get_error(403);
+                }
+            } else {
+                get_error(403);
+            }
+            break;
+        case 'blast':
+            if($_SESSION['loggedin']) {
+                if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                    getBlast();
                 } else {
                     get_error(403);
                 }
@@ -88,15 +101,11 @@ if(array_key_exists('page', $_POST)) {
         case 'add_event':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::add_event($_POST['attr']);
-            } else {
-                get_error(403);
             }
             break;
         case 'remove_event':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::remove_event($_POST['attr']['id']);
-            } else {
-                get_error(403);
             }
             break;
         case 'join_event':
@@ -105,15 +114,16 @@ if(array_key_exists('page', $_POST)) {
         case 'add_user':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::add_user($_POST['attr']);
-            } else {
-                get_error(403);
             }
             break;
         case 'remove_user':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
                 Util::remove_user($_POST['attr']['id']);
-            } else {
-                get_error(403);
+            }
+            break;
+        case 'email_blast':
+            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                Util::emailBlast($_POST['attr']);
             }
             break;
         case 'sign_in':

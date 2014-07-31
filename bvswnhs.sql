@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL
   `bvid` varchar(8) NOT NULL,
   `hours` int(11) NOT NULL,
   `rank` int(1) NOT NULL DEFAULT '0',
