@@ -1,3 +1,3 @@
 <?php
-`git pull --force`
+`git pull --force`;
 ?>
