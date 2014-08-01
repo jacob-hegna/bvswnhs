@@ -24,11 +24,6 @@ $database = new medoo([
     'username' => SERVER_USER,
     'password' => SERVER_PASS]);
 
-if(array_key_exists('from', $_GET) &&
-    array_key_exists('to', $_GET)) {
-    echo Util::get_cal_events();
-}
-
 if(!array_key_exists('loggedin', $_SESSION)) {
     $_SESSION['loggedin'] = false;
 }
@@ -96,7 +91,7 @@ if(array_key_exists('page', $_POST)) {
 } else if(array_key_exists('util', $_POST)) {
     switch($_POST['util']) {
         case 'cal_events':
-            Util::get_cal_events();
+            echo Util::get_cal_events();
             break;
         case 'add_event':
             if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {

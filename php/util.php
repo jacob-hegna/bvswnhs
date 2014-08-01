@@ -18,10 +18,7 @@ class Util {
                 'start' => (strtotime($i['date']) . '000')
             );
         }
-        return json_encode(array(
-            'success' => 1,
-            'result' => $events
-        ));
+        return json_encode($events);
     }
 
     public static function getUser($id) {

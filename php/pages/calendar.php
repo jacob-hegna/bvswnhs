@@ -5,9 +5,21 @@ function get_cal() {
 <br>
 <div id="calendar-div"></div>
 <script type="text/javascript">
-    var calendar = $("#calendar-div").calendar({
-        tmpl_path: "/tmpls/",
-        events_source: "/php/main.php"
+    var obj;
+    $.ajax({
+        type: "post",
+        url: "/php/main.php",
+        data: {
+            util: "cal_events"
+        }
+    }).done(function(data) {
+        obj = JSON.parse(data);
+        var calendar = $("#calendar-div").calendar({
+            tmpl_path: "/tmpls/",
+            events_source: function() {
+                return obj;
+            }
+        });
     });
 </script>
 ';
