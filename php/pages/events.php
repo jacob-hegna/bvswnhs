@@ -18,7 +18,7 @@ function get_events() {
             <td>' . $i['name']  . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
-            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="remove-event btn btn-danger btn-sm form-control">Remove</button></td>' : '') . '
+            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Remove</button></td>' : '') . '
         </tr>';
     }
     if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
@@ -31,36 +31,10 @@ function get_events() {
         </tr>
         <script>
 initAdminCtrls = function() {
-    $(".join-event").addClass("remove-event");
-    $(".join-event").removeClass("join-event");
-    $(".remove-event").text("Remove");
+    $(".act-on-event").text("Remove");
     $("#new-event-row").show();
-    $("#add-event").on("click", function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                util: "add_event",
-                attr: {
-                    name: $("#name-box").val(),
-                    hours: $("#hour-box").val(),
-                    date: $("#date-box").val()
-                }
-            }
-        }).done(function(data) {
-            $.ajax({
-                type: "post",
-                url: "/php/main.php",
-                data: {
-                    page: "events"
-                }
-            }).done(function(data) {
-                $("#main").html(data);
-            });
-        });
-    });
-    $(".remove-event").on("click", function(e) {
+    $(".act-on-event").unbind();
+    $(".act-on-event").on("click", function(e) {
         e.preventDefault();
         eleid = $(this).attr("id");
         $.ajax({
@@ -86,11 +60,10 @@ initAdminCtrls = function() {
     });
 };
 initMemberCtrls = function() {
-    $(".remove-event").addClass("join-event");
-    $(".remove-event").removeClass("remove-event");
-    $(".join-event").text("Join");
+    $(".act-on-event").text("Join");
     $("#new-event-row").hide();
-    $(".join-event").on("click", function(e) {
+    $(".act-on-event").unbind();
+    $(".act-on-event").on("click", function(e) {
         e.preventDefault();
         eleid = $(this).attr("id");
         $.ajax({
@@ -125,6 +98,31 @@ $("#admin").on("click", function(e) {
         initMemberCtrls();
         mode = "member";
     }
+});
+$("#add-event").on("click", function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "post",
+        url: "/php/main.php",
+        data: {
+            util: "add_event",
+            attr: {
+                name: $("#name-box").val(),
+                hours: $("#hour-box").val(),
+                date: $("#date-box").val()
+            }
+        }
+    }).done(function(data) {
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                page: "events"
+            }
+        }).done(function(data) {
+            $("#main").html(data);
+        });
+    });
 });
         </script>';
     }
