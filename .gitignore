@@ -3,3 +3,4 @@
 .LSOverride
 
 php/config.php
+php/git-update.php
