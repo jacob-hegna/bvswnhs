@@ -55,6 +55,11 @@ class Util {
 
     public static function remove_event($id) {
         global $database;
+        $members = json_decode($database->get('events', 'members', ['id' => $id]));
+        foreach($members as $bvid) {
+            $updated_events = array_diff(json_decode($database->get('members', 'events', ['bvid' => $bvid])), array($id));
+            $database->update('members', ['events' => json_encode($updated_events)], ['bvid' => $bvid]);
+        }
         $database->delete('events', ['id' => $id]);
     }
 
@@ -64,6 +69,10 @@ class Util {
         if(!in_array($id, $events)) { //Only if not already subscribed
             $events[] = $id;
             $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
+            //Also add to list of members on event database
+            $members = json_decode($database->get('events', 'members', ['bvid' => $_SESSION['bvid']]));
+            $members[] = $_SESSION['bvid'];
+            $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
         }
     }
 
