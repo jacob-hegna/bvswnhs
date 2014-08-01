@@ -8,101 +8,36 @@ class Page {
         echo '
 <script>
     $("#loadbar").loadie();
-    $("#home").on("click", function(e) {
+    var tabs = [
+        {"id": "home", "title": "Home"},
+        {"id": "events", "title": "Events"},
+        {"id": "members", "title": "Members"},
+        {"id": "calendar", "title": "Calendar"},
+        {"id": "blast", "title": "Email Blast"}
+    ];
+    $("#navbar-left").html(_.template($("#left-nav-template").html(), tabs));
+
+    $(".tab").on("click", function(e) {
         e.preventDefault();
         $("#loadbar").loadie(.1);
         $(".loadie").fadeIn();
+        var t = $(this).attr("id");
         $.ajax({
             type: "post",
             url: "/php/main.php",
             data: {
-                page: "home"
+                page: t
             }
         }).done(function(data) {
-            history.pushState({}, "", "/home/");
+            history.pushState({}, "", "/" + t + "/");
             $("#main").html(data);
-            $("#home").parent().addClass("active");
+            $("#" + t).parent().addClass("active");
             setTimeout(function() {
                 $("#loadbar").loadie(1);
-            }, 100)
+            }, 100);
         });
     });
-    $("#events").on("click", function(e) {
-        e.preventDefault();
-        $("#loadbar").loadie(.1);
-        $(".loadie").fadeIn();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "events"
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/events/");
-            $("#main").html(data);
-            $("#events").parent().addClass("active");
-            setTimeout(function() {
-                $("#loadbar").loadie(1);
-            }, 100)
-        });
-    });
-    $("#members").on("click", function(e) {
-        e.preventDefault();
-        $("#loadbar").loadie(.1);
-        $(".loadie").fadeIn();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "members"
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/members/");
-            $("#main").html(data);
-            $("#members").parent().addClass("active");
-            setTimeout(function() {
-                $("#loadbar").loadie(1);
-            }, 100)
-        });
-    });
-    $("#blast").on("click", function(e) {
-        e.preventDefault();
-        $("#loadbar").loadie(.1);
-        $(".loadie").fadeIn();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "blast"
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/blast/");
-            $("#main").html(data);
-            $("#blast").parent().addClass("active");
-            setTimeout(function() {
-                $("#loadbar").loadie(1);
-            }, 100)
-        });
-    });
-    $("#calendar").on("click", function(e) {
-        e.preventDefault();
-        $("#loadbar").loadie(.1);
-        $(".loadie").fadeIn();
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "calendar"
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/calendar/");
-            $("#main").html(data);
-            $("#calendar").parent().addClass("active");
-            setTimeout(function() {
-                $("#loadbar").loadie(1);
-            }, 200)
-        });
-    });
+
     $("#sign_out").on("click", function(e) {
         e.preventDefault();
         $.ajax({
@@ -138,14 +73,12 @@ class Page {
       <a id="logo" class="navbar-brand animated fadeInLeft">BVSW NHS <img width="20px" src="/img/nhs-white.png"></a>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="#" id="home">Home</a></li>
-        <li><a href="#" id="events">Events</a></li>
-        <li><a href="#" id="calendar">Calendar</a></li>
-        ' . ((Util::getUser($_SESSION['bvid'])['rank'] == 2) ?
-        '<li><a href="#" id="members">Members</a></li>
-        <li><a href="#" id="blast">Email Blast</a></li>' : '') . '
-      </ul>
+      <script id="left-nav-template" type="text/x-template">
+          <% _.each(tabs, function(tab) { %>
+              <li><a href="#" id="<%= tab.id %>" class="tab"><%= tab.title %></a></li>
+          <% }); %>
+      </script>
+      <ul id="navbar-left" class="nav navbar-nav"></ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" id="sign_out">Logout <i class="fa fa-sign-out"></i> - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>
       </ul>

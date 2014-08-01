@@ -15,7 +15,7 @@ function get_cal() {
     }).done(function(data) {
         obj = JSON.parse(data);
         var calendar = $("#calendar-div").calendar({
-            tmpl_path: "/tmpls/",
+            tmpl_path: "/tmpls/calendar/",
             events_source: function() {
                 return obj;
             }
