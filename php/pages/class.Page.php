@@ -19,23 +19,7 @@ class Page {
 
     $(".tab").on("click", function(e) {
         e.preventDefault();
-        $("#loadbar").loadie(.1);
-        $(".loadie").fadeIn();
-        var t = $(this).attr("id");
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: t
-            }
-        }).done(function(data) {
-            history.pushState({}, "", "/" + t + "/");
-            $("#main").html(data);
-            $("#" + t).parent().addClass("active");
-            setTimeout(function() {
-                $("#loadbar").loadie(1);
-            }, 100);
-        });
+        loadTab($(this).attr("id"));
     });
 
     $("#sign_out").on("click", function(e) {

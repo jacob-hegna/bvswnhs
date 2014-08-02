@@ -16,15 +16,7 @@ function getBlast() {
                 }
             }
         }).done(function(data) {
-            $.ajax({
-                type: "post",
-                url: "/php/main.php",
-                data: {
-                    page: "home"
-                }
-            }).done(function(data) {
-                $("#main").html(data);
-            });
+            loadTab("home");
         });
     });
 </script>

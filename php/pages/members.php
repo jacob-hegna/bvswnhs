@@ -63,15 +63,7 @@ function get_members() {
                         }
                     }
                 }).done(function(data) {
-                    $.ajax({
-                        type: "post",
-                        url: "/php/main.php",
-                        data: {
-                            page: "members"
-                        }
-                    }).done(function(data) {
-                        $("#main").html(data);
-                    });
+                    loadTab("members");
                 });
             });
             $(".remove-user").on("click", function(e) {
@@ -87,15 +79,7 @@ function get_members() {
                         }
                     }
                 }).done(function(d) {
-                    $.ajax({
-                        type: "post",
-                        url: "/php/main.php",
-                        data: {
-                            page: "members"
-                        }
-                    }).done(function(data) {
-                        $("#main").html(data);
-                    });
+                    loadTab("members");
                 });
             });
         </script>

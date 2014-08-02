@@ -47,15 +47,7 @@ initAdminCtrls = function() {
                 }
             }
         }).done(function(d) {
-            $.ajax({
-                type: "post",
-                url: "/php/main.php",
-                data: {
-                    page: "events"
-                }
-            }).done(function(data) {
-                $("#main").html(data);
-            });
+            loadTab("events");
         });
     });
 };
@@ -76,15 +68,7 @@ initMemberCtrls = function() {
                 }
             }
         }).done(function(data) {
-            $.ajax({
-                type: "post",
-                url: "/php/main.php",
-                data: {
-                    page: "events"
-                }
-            }).done(function(data) {
-                $("#main").html(data);
-            });
+            loadTab("events");
         });
     });
 }
@@ -113,15 +97,7 @@ $("#add-event").on("click", function(e) {
             }
         }
     }).done(function(data) {
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "events"
-            }
-        }).done(function(data) {
-            $("#main").html(data);
-        });
+        loadTab("events");
     });
 });
         </script>';
