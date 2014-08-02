@@ -7,6 +7,10 @@ class Util {
         }
     }
 
+    public static function formatPhoneNum($num) {
+        return return "(" . substr($num, 0, 3) . ") " . substr($num, 3, 3) . "-" . substr($num, 6, 4);
+    }
+
     public static function get_cal_events() {
         global $database;
         $events = array();
@@ -81,6 +85,7 @@ class Util {
         $database->insert('members', [
             'name' => $attr['name'],
             'email' => $attr['email'],
+            'phone' => $attr['phone'],
             'hours' => $attr['hours'],
             'bvid' => $attr['bvid']
         ]);
