@@ -27,7 +27,7 @@ function getProfile() {
                     <tbody>
 ';
     foreach (array_filter($events, function($event) {
-        return strtotime($event['date']) >= strtotime('+1 day', strtotime(date("Y-m-d")));
+        return strtotime($event['date']) >= strtotime(date("Y-m-d"));
     }) as $i) {
         $page .= '
                 <tr>
@@ -53,7 +53,7 @@ function getProfile() {
                     <tbody>
 ';
     foreach (array_filter($events, function($event) {
-        return strtotime($event['date']) < strtotime('+1 day', strtotime(date("Y-m-d")));
+        return strtotime($event['date']) < strtotime(date("Y-m-d"));
     }) as $i) {
         $page .= '
                 <tr>
