@@ -1,5 +1,5 @@
 <?php
-function get_events() {
+function getEvents() {
     global $database;
     $page = '
 <script>
@@ -31,7 +31,7 @@ initMemberCtrls();
     <thead>
         <th>Event</th>
         <th>Possible hours</th>
-        <th>Date</th>' . (Util::getUser($_SESSION['bvid'])['rank'] >= 1 ?
+        <th>Date</th>' . (Util::getCUser()['rank'] >= 1 ?
         '<th><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
@@ -39,13 +39,13 @@ initMemberCtrls();
     foreach($database->select('events', '*') as $i) {
         $page .= '
         <tr>
-            <td>' . $i['name']  . '</td>
+            <td>' . $i['name'] . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
             <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }
-    if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+    if(Util::getCUser()['rank'] >= 1) {
         $page .= '
         <tr id="new-event-row">
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>

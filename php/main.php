@@ -36,93 +36,93 @@ if(array_key_exists('page', $_POST)) {
     switch($_POST['page']) {
         case 'home':
             if($_SESSION['loggedin']) {
-                get_profile();
+                getProfile();
             } else {
-                get_home();
+                getHome();
             }
             break;
         case 'profile':
             if($_SESSION['loggedin']) {
-                get_profile();
+                getProfile();
             } else {
-                get_error(403);
+                getError(403);
             }
             break;
         case 'events':
             if($_SESSION['loggedin']) {
-                get_events();
+                getEvents();
             } else {
-                get_error(403);
+                getError(403);
             }
             break;
         case 'calendar':
             if($_SESSION['loggedin']) {
-                get_cal();
+                getCal();
             } else {
-                get_error(403);
+                getError(403);
             }
             break;
         case 'members':
             if($_SESSION['loggedin']) {
-                if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
-                    get_members();
+                if(Util::getCUser()['rank'] >= 1) {
+                    getMembers();
                 } else {
-                    get_error(403);
+                    getError(403);
                 }
             } else {
-                get_error(403);
+                getError(403);
             }
             break;
         case 'blast':
             if($_SESSION['loggedin']) {
-                if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+                if(Util::getCUser()['rank'] >= 1) {
                     getBlast();
                 } else {
-                    get_error(403);
+                    getError(403);
                 }
             } else {
-                get_error(403);
+                getError(403);
             }
             break;
         default:
-            get_error(404);
+            getError(404);
             break;
     }
 } else if(array_key_exists('util', $_POST)) {
     switch($_POST['util']) {
         case 'cal_events':
-            echo Util::get_cal_events();
+            echo Util::getCalEvents();
             break;
         case 'add_event':
-            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
-                Util::add_event($_POST['attr']);
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::addEvent($_POST['attr']);
             }
             break;
         case 'remove_event':
-            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
-                Util::remove_event($_POST['attr']['id']);
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::removeEvent($_POST['attr']['id']);
             }
             break;
         case 'join_event':
-            Util::join_event($_POST['attr']['id']);
+            Util::joinEvent($_POST['attr']['id']);
             break;
         case 'add_user':
-            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
-                Util::add_user($_POST['attr']);
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::addUser($_POST['attr']);
             }
             break;
         case 'remove_user':
-            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
-                Util::remove_user($_POST['attr']['id']);
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::removeUser($_POST['attr']['id']);
             }
             break;
         case 'email_blast':
-            if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
+            if(Util::getCUser()['rank'] >= 1) {
                 Util::emailBlast($_POST['attr']);
             }
             break;
         case 'sign_in':
-            Util::sign_in($_POST['attr']['bvid']);
+            Util::signIn($_POST['attr']['bvid']);
             break;
         case 'sign_out':
             session_unset();

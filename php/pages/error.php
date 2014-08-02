@@ -1,5 +1,5 @@
 <?php
-function get_error($code) {
+function getError($code) {
     $details;
     $page;
     switch($code) {

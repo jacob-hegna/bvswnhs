@@ -64,7 +64,7 @@ class Page {
       </script>
       <ul id="navbar-left" class="nav navbar-nav"></ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="sign_out">Logout <i class="fa fa-sign-out"></i> - ' . Util::getUser($_SESSION['bvid'])['name'] . '</a></li>
+        <li><a href="#" id="sign_out">Logout <i class="fa fa-sign-out"></i> - ' . Util::getCUser()['name'] . '</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

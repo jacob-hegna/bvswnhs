@@ -1,5 +1,5 @@
 <?php
-function get_cal() {
+function getCal() {
     $page = '
 <h1 style="text-align: center">Calendar</h1>
 <br>

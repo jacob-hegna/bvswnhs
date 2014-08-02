@@ -1,5 +1,5 @@
 <?php
-function get_profile() {
+function getProfile() {
     global $database;
     $myevents = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
     $events = array_map(function($eventid) {

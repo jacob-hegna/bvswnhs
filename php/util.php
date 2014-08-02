@@ -11,7 +11,7 @@ class Util {
         return "(" . substr($num, 0, 3) . ") " . substr($num, 3, 3) . "-" . substr($num, 6, 4);
     }
 
-    public static function get_cal_events() {
+    public static function getCalEvents() {
         global $database;
         $events = array();
         foreach($database->select('events', '*') as $i) {
@@ -36,7 +36,7 @@ class Util {
         return Util::getUser($_SESSION['bvid']);
     }
 
-    public static function sign_in($bvid) {
+    public static function signIn($bvid) {
         global $database;
 
         if($database->has('members', ['bvid' => $bvid])) {
@@ -48,7 +48,7 @@ class Util {
         }
     }
 
-    public static function add_event($attr) {
+    public static function addEvent($attr) {
         global $database;
         $database->insert('events', [
             'name' => $attr['name'],
@@ -57,7 +57,7 @@ class Util {
         ]);
     }
 
-    public static function remove_event($id) {
+    public static function removeEvent($id) {
         global $database;
         $members = json_decode($database->get('events', 'members', ['id' => $id]));
         foreach($members as $bvid) {
@@ -67,7 +67,7 @@ class Util {
         $database->delete('events', ['id' => $id]);
     }
 
-    public static function join_event($id) {
+    public static function joinEvent($id) {
         global $database;
         $events = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
         if(!in_array($id, $events)) { //Only if not already subscribed
@@ -80,7 +80,7 @@ class Util {
         }
     }
 
-    public static function add_user($attr) {
+    public static function addUser($attr) {
         global $database;
         $database->insert('members', [
             'name' => $attr['name'],
@@ -91,7 +91,7 @@ class Util {
         ]);
     }
 
-    public static function remove_user($id) {
+    public static function removeUser($id) {
         global $database;
         $database->delete('members', ['bvid' => $id]);
     }

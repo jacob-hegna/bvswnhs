@@ -1,5 +1,5 @@
 <?php
-function get_members() {
+function getMembers() {
     global $database;
     $page = '
 <h1 style="text-align: center">Members</h1>

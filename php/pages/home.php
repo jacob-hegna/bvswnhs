@@ -1,6 +1,6 @@
 <?php
 
-function get_home() {
+function getHome() {
     $page =
 <<<EOD
 <script>
