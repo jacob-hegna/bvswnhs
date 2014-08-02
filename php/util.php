@@ -8,7 +8,7 @@ class Util {
     }
 
     public static function formatPhoneNum($num) {
-        return return "(" . substr($num, 0, 3) . ") " . substr($num, 3, 3) . "-" . substr($num, 6, 4);
+        return "(" . substr($num, 0, 3) . ") " . substr($num, 3, 3) . "-" . substr($num, 6, 4);
     }
 
     public static function get_cal_events() {

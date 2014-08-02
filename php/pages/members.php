@@ -30,8 +30,8 @@ function get_members() {
         <tr>
             <td>' . $i['name'] . ' <span class="label label-'.$rankColor.'">'.Util::getRank(Util::getUser($i['bvid'])['rank']).'</span></td>
             <td>' . $i['email']  . '</td>
-            <td>' . $i['bvid'] . '</td>
             <td>' . Util::formatPhoneNum($i['phone']) . '</td>
+            <td>' . $i['bvid'] . '</td>
             <td>' . $i['hours'] . '</td>
             <td><button id="'.$i['bvid'].'" class="remove-user btn btn-danger btn-sm form-control">Remove</button></td>
         </tr>';
@@ -41,8 +41,8 @@ function get_members() {
         <tr>
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="email-box" class="form-control" placeholder="Email" required=""></td>
-            <td><input id="bvid-box" class="form-control" placeholder="BV ID" required=""></td>
             <td><input id="phone-box" class="form-control" placeholder="Phone Number" required=""></td>
+            <td><input id="bvid-box" class="form-control" placeholder="BV ID" required=""></td>
             <td><input id="hour-box" class="form-control" placeholder="Hours" required=""></td>
             <td><button id="add-user" class="btn btn-primary btn-sm form-control">Submit</button></td>
         </tr>
