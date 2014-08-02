@@ -53,7 +53,8 @@ class Util {
         $database->insert('events', [
             'name' => $attr['name'],
             'hours' => $attr['hours'],
-            'date' => $attr['date']
+            'date' => $attr['date'],
+            'maxmembers' => $attr['maxmembers']
         ]);
     }
 
@@ -71,12 +72,13 @@ class Util {
         global $database;
         $events = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
         if(!in_array($id, $events)) { //Only if not already subscribed
-            $events[] = $id;
-            $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
-            //Also add to list of members on event database
-            $members = json_decode($database->get('events', 'members', ['bvid' => $_SESSION['bvid']]));
-            $members[] = $_SESSION['bvid'];
-            $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
+            $members = json_decode($database->get('events', 'members', ['id' => $id]));
+            if(count($members) < $database->get('events', 'maxmembers', ['id' => $id])) {
+                $members[] = $_SESSION['bvid'];
+                $events[] = $id;
+                $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
+                $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
+            }
         }
     }
 

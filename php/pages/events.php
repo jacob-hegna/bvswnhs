@@ -31,7 +31,8 @@ initMemberCtrls();
     <thead>
         <th>Event</th>
         <th>Possible hours</th>
-        <th>Date</th>' . (Util::getCUser()['rank'] >= 1 ?
+        <th>Date</th>
+        <th>Current Availability</th>' . (Util::getCUser()['rank'] >= 1 ?
         '<th><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
@@ -42,6 +43,7 @@ initMemberCtrls();
             <td>' . $i['name'] . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
+            <td>' . count(json_decode($i['members'])) . ' / ' . $i['maxmembers'] . '</td>
             <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }
@@ -51,6 +53,7 @@ initMemberCtrls();
             <td><input id="name-box" class="form-control" placeholder="Name" required="" autofocus></td>
             <td><input id="hour-box" class="form-control" placeholder="Possible Hour(s)" required=""></td>
             <td><input id="date-box" class="form-control" placeholder="Date" required=""></td>
+            <td><input id="maxmem-box" class="form-control" placeholder="Maximum Members" required=""></td>
             <td><button id="add-event" class="btn btn-primary btn-sm form-control">Submit</button></td>
         </tr>
         <script>
@@ -95,7 +98,8 @@ $("#add-event").on("click", function(e) {
             attr: {
                 name: $("#name-box").val(),
                 hours: $("#hour-box").val(),
-                date: $("#date-box").val()
+                date: $("#date-box").val(),
+                maxmembers: $("#maxmem-box").val()
             }
         }
     }).done(function(data) {
