@@ -2,6 +2,30 @@
 function get_events() {
     global $database;
     $page = '
+<script>
+initMemberCtrls = function() {
+    $(".act-on-event").text("Join");
+    $("#new-event-row").hide();
+    $(".act-on-event").unbind();
+    $(".act-on-event").on("click", function(e) {
+        e.preventDefault();
+        eleid = $(this).attr("id");
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                util: "join_event",
+                attr: {
+                    id: eleid,
+                }
+            }
+        }).done(function(data) {
+            loadTab("events");
+        });
+    });
+}
+initMemberCtrls();
+</script>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Events</h1>
     <thead>
@@ -18,7 +42,7 @@ function get_events() {
             <td>' . $i['name']  . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
-            ' . ((Util::getUser($_SESSION['bvid'])['rank'] >= 1) ? '<td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Remove</button></td>' : '') . '
+            <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }
     if(Util::getUser($_SESSION['bvid'])['rank'] >= 1) {
@@ -51,28 +75,6 @@ initAdminCtrls = function() {
         });
     });
 };
-initMemberCtrls = function() {
-    $(".act-on-event").text("Join");
-    $("#new-event-row").hide();
-    $(".act-on-event").unbind();
-    $(".act-on-event").on("click", function(e) {
-        e.preventDefault();
-        eleid = $(this).attr("id");
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                util: "join_event",
-                attr: {
-                    id: eleid,
-                }
-            }
-        }).done(function(data) {
-            loadTab("events");
-        });
-    });
-}
-initMemberCtrls();
 var mode = "member";
 $("#admin").on("click", function(e) {
     if(mode == "member") {
