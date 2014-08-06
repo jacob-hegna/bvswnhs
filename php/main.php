@@ -12,6 +12,7 @@ require('pages/class.Page.php');
 require('pages/error.php');
 require('pages/members.php');
 require('pages/events.php');
+require('pages/meetings.php');
 require('pages/calendar.php');
 require('pages/blast.php');
 require('pages/home.php');
@@ -51,6 +52,13 @@ if(array_key_exists('page', $_POST)) {
         case 'events':
             if($_SESSION['loggedin']) {
                 getEvents();
+            } else {
+                getError(403);
+            }
+            break;
+        case 'meetings':
+            if($_SESSION['loggedin']) {
+                getMeetings();
             } else {
                 getError(403);
             }

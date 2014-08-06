@@ -22,6 +22,14 @@ class Util {
                 'start' => (strtotime($i['date']) . '000')
             );
         }
+        foreach($database->select('meetings', '*') as $i) {
+            $events[] = array(
+                'id' => $i['id'],
+                'title' => $i['description'],
+                'class' => 'event-important',
+                'start' => (strtotime($i['date']) . '000')
+            );
+        }
         return json_encode($events);
     }
 

@@ -11,6 +11,7 @@ class Page {
     var tabs = [
         {"id": "home", "title": "Home"},
         {"id": "events", "title": "Events"},
+        {"id": "meetings", "title": "Meetings"},
         {"id": "members", "title": "Members"},
         {"id": "calendar", "title": "Calendar"},
         {"id": "blast", "title": "Email Blast"}
