@@ -19,15 +19,15 @@ class Util {
                 'id' => $i['id'],
                 'title' => $i['name'],
                 'class' => 'event-important',
-                'start' => (strtotime($i['date']) . '000')
+                'start' => (strtotime($i['date']) . '000' + 86400000)
             );
         }
         foreach($database->select('meetings', '*') as $i) {
             $events[] = array(
                 'id' => $i['id'],
                 'title' => $i['description'],
-                'class' => 'event-important',
-                'start' => (strtotime($i['date']) . '000')
+                'class' => 'event-info',
+                'start' => (strtotime($i['date']) . '000' + 86400000)
             );
         }
         return json_encode($events);
@@ -74,6 +74,19 @@ class Util {
             $database->update('members', ['events' => json_encode($updated_events)], ['bvid' => $bvid]);
         }
         $database->delete('events', ['id' => $id]);
+    }
+
+    public static function addMeeting($attr) {
+        global $database;
+        $database->insert('meetings', [
+            'description' => $attr['description'],
+            'date' => $attr['date']
+        ]);
+    }
+
+    public static function removeMeeting($id) {
+        global $database;
+        $database->delete('meetings', ['id' => $id]);
     }
 
     public static function joinEvent($id) {

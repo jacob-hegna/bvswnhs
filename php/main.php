@@ -111,6 +111,16 @@ if(array_key_exists('page', $_POST)) {
                 Util::removeEvent($_POST['attr']['id']);
             }
             break;
+        case 'add_meeting':
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::addMeeting($_POST['attr']);
+            }
+            break;
+        case 'remove_meeting':
+            if(Util::getCUser()['rank'] >= 1) {
+                Util::removeMeeting($_POST['attr']['id']);
+            }
+            break;
         case 'join_event':
             Util::joinEvent($_POST['attr']['id']);
             break;
