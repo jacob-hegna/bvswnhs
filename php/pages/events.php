@@ -25,7 +25,8 @@ initMemberCtrls = function() {
     });
 }
 initMemberCtrls();
-</script>
+</script>' .
+(Util::getCUser()['rank'] >= 1 ? '
 <div id="editable-template" style="display:none">
     <div class="input-group" style="width:auto">
         <input class="form-control" autofocus>
@@ -34,7 +35,7 @@ initMemberCtrls();
         </span>
     </div>
 </div>
-<script src="/js/edit-table.js"></script>
+<script src="/js/edit-table.js"></script>' : '') . '
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Events</h1>
     <thead>
