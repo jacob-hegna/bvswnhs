@@ -2,6 +2,10 @@ $(document).ready(function() {
     var url  = $.url();
     var p    = url.segment(1);
 
+    if(url.attr('host') == 'localhost' || url.attr('host') == '127.0.0.1') {
+        $('#wrap').css('background-color', '#ff0000');
+    }
+
     if(p == '') {
         history.pushState({}, "", "/home/");
         p = "home";
