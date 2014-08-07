@@ -106,7 +106,7 @@ $("#add-event").on("click", function(e) {
         loadTab("events");
     });
 });
-$("tbody > tr").each(function() {
+$("tbody > tr:not(#new-event-row)").each(function() {
     $(this).on("click", function(e) {
         e.preventDefault();
         $.ajax({
