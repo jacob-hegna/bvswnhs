@@ -12,9 +12,9 @@ class Page {
         {"id": "home", "title": "Home"},
         {"id": "events", "title": "Events"},
         {"id": "meetings", "title": "Meetings"},
+        {"id": "calendar", "title": "Calendar"} ' . (Util::getCUser()['rank'] >= 1 ? ',
         {"id": "members", "title": "Members"},
-        {"id": "calendar", "title": "Calendar"},
-        {"id": "blast", "title": "Email Blast"}
+        {"id": "blast", "title": "Email Blast"} ' : '') . '
     ];
     $("#navbar-left").html(_.template($("#left-nav-template").html(), tabs));
 
