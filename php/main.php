@@ -11,6 +11,7 @@ require('sendMail.php');
 require('pages/class.Page.php');
 require('pages/error.php');
 require('pages/members.php');
+require('pages/eventdetails.php');
 require('pages/events.php');
 require('pages/meetings.php');
 require('pages/calendar.php');
@@ -51,7 +52,11 @@ if(array_key_exists('page', $_POST)) {
             break;
         case 'events':
             if($_SESSION['loggedin']) {
-                getEvents();
+                if(array_key_exists('id', $_POST['attr'])) {
+                    getSpecificEvent($_POST['attr']['id']);
+                } else {
+                    getEvents();
+                }
             } else {
                 getError(403);
             }

@@ -106,6 +106,24 @@ $("#add-event").on("click", function(e) {
         loadTab("events");
     });
 });
+$("tr").each(function() {
+    $(this).on("click", function(e) {
+        e.preventDefault();
+        console.log("lele");
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                page: "events",
+                attr: {
+                    id: $(this).find("td").find("button").attr("id")
+                }
+            }
+        }).done(function(data) {
+            $("#main").html(data);
+        });
+    });
+});
         </script>';
     }
     $page .= '

@@ -4,7 +4,7 @@ class Page {
 
     }
 
-    private function start() {
+    static private function start() {
         echo '
 <script>
     $("#loadbar").loadie();
@@ -80,7 +80,7 @@ class Page {
         Page::end();
     }
 
-    private function end() {
+    static private function end() {
         echo '
 </div>
 ';
