@@ -70,7 +70,7 @@ class Util {
 
     public static function joinEvent($id) {
         global $database;
-        $events = json_decode($database->get('members', 'events', ['bvid' => $_SESSION['bvid']]));
+        $events = json_decode(Util::getCUser()['events']);
         if(!in_array($id, $events)) { //Only if not already subscribed
             $members = json_decode($database->get('events', 'members', ['id' => $id]));
             if(count($members) < $database->get('events', 'maxmembers', ['id' => $id])) {
@@ -80,6 +80,24 @@ class Util {
                 $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
             }
         }
+    }
+
+    public static function inEvent($id) {
+        global $database;
+        $events = json_decode(Util::getCUser()['events']);
+        if(in_array($id, $events)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isFull($id) {
+        global $database;
+        $event = $database->get('events', '*', ['id' => $id]);
+        if(count(json_decode($event['members'])) == $event['maxmembers']) {
+            return true;
+        }
+        return false;
     }
 
     public static function addUser($attr) {

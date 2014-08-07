@@ -40,10 +40,10 @@ initMemberCtrls();
     foreach($database->select('events', '*') as $i) {
         $page .= '
         <tr>
-            <td>' . $i['name'] . '</td>
+            <td>' . (Util::inEvent($i['id']) ? '<span class="badge alert-success"><span class="fa fa-check"></span></span>' : '') . $i['name'] . '</td>
             <td>' . $i['hours']  . '</td>
             <td>' . $i['date'] . '</td>
-            <td>' . count(json_decode($i['members'])) . ' / ' . $i['maxmembers'] . '</td>
+            <td>' . (Util::isFull($i['id']) ? 'Full' : count(json_decode($i['members'])) . ' / ' . $i['maxmembers']) . '</td>
             <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }
