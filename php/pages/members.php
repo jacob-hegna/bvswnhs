@@ -14,11 +14,11 @@ function getMembers() {
 <h1 style="text-align: center">Members</h1>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
     <thead>
-        <th width="20%">Name</th>
-        <th width="20%">Email</th>
-        <th width="20%">Phone</th>
-        <th width="20%">BVID</th>
-        <th width="20%">Hours</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>BVID</th>
+        <th>Hours</th>
     </thread>
     <tbody>';
 

@@ -29,11 +29,11 @@ initMemberCtrls();
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Events</h1>
     <thead>
-        <th width="25%">Name</th>
-        <th width="25%">Hours</th>
-        <th width="25%">Date</th>
-        <th width="25%">MaxMembers</th>' . (Util::getCUser()['rank'] >= 1 ?
-        '<th><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
+        <th width="20%">Name</th>
+        <th width="20%">Hours</th>
+        <th width="20%">Date</th>
+        <th width="20%">MaxMembers</th>' . (Util::getCUser()['rank'] >= 1 ?
+        '<th width="20%"><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
 
