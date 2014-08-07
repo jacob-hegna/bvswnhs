@@ -54,6 +54,14 @@ CREATE TABLE IF NOT EXISTS `members` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
+CREATE TABLE IF NOT EXISTS `meetings` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `description` varchar(180) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
 INSERT INTO `bvswnhs`.`members` (`id`, `name`, `email`, `phone`, `bvid`, `hours`, `rank`, `events`) VALUES (NULL, 'Root User', 'example@bluevalleyk12.net', '5555555555', '12345678', '0', '2', '[]');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
