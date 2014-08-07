@@ -26,13 +26,22 @@ initMemberCtrls = function() {
 }
 initMemberCtrls();
 </script>
+<div id="editable-template" style="display:none">
+    <div class="input-group" style="width:auto">
+        <input class="form-control" autofocus>
+        <span class="input-group-btn">
+            <button id="editable-submit" class="btn btn-default" type="submit" type="button">Submit</button>
+        </span>
+    </div>
+</div>
+<script src="/js/edit-table.js"></script>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Events</h1>
     <thead>
-        <th>Event</th>
-        <th>Possible hours</th>
-        <th>Date</th>
-        <th>Current Availability</th>' . (Util::getCUser()['rank'] >= 1 ?
+        <th width="25%">Name</th>
+        <th width="25%">Hours</th>
+        <th width="25%">Date</th>
+        <th width="25%">MaxMembers</th>' . (Util::getCUser()['rank'] >= 1 ?
         '<th><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
@@ -40,10 +49,10 @@ initMemberCtrls();
     foreach($database->select('events', '*') as $i) {
         $page .= '
         <tr>
-            <td>' . $i['name'] . '</td>
-            <td>' . $i['hours']  . '</td>
-            <td>' . $i['date'] . '</td>
-            <td>' . count(json_decode($i['members'])) . ' / ' . $i['maxmembers'] . '</td>
+            <td id="'.$i['id'].'" class="table-editable">' . $i['name'] . '</td>
+            <td id="'.$i['id'].'" class="table-editable">' . $i['hours']  . '</td>
+            <td id="'.$i['id'].'" class="table-editable">' . $i['date'] . '</td>
+            <td id="'.$i['id'].'" class="table-editable">' . count(json_decode($i['members'])) . ' / ' . $i['maxmembers'] . '</td>
             <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }

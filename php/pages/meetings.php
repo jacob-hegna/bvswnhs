@@ -10,6 +10,7 @@ function getMeetings() {
         </span>
     </div>
 </div>
+<script src="/js/edit-table.js"></script>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Meetings</h1>
     <thead>
@@ -35,30 +36,6 @@ function getMeetings() {
             <td><button id="add-meeting" class="btn btn-primary btn-sm form-control">Submit</button></td>
         </tr>
         <script>
-$(".table-editable").on("click", function(e) {
-    if($(this).hasClass("editing") == false) {
-        $(this).addClass("editing");
-        $(this).html($("#editable-template").html());
-    }
-});
-$(document).delegate("#editable-submit", "click", function() {
-    $.ajax({
-        type: "post",
-        url: "/php/main.php",
-        data: {
-            util: "edit_sql",
-            attr: {
-                table: "meetings",
-                id: $(this).closest("td").attr("id"),
-                column: $(this).closest("table").find("th").eq($(this).closest("td").index()).html().toLowerCase(),
-                new: $(this).closest("span").prev().val()
-            }
-        }
-    }).done(function(data) {
-        loadTab("meetings");
-    });
-});
-
 $("#add-meeting").on("click", function(e) {
     e.preventDefault();
     $.ajax({
