@@ -98,6 +98,12 @@ if(array_key_exists('page', $_POST)) {
     }
 } else if(array_key_exists('util', $_POST)) {
     switch($_POST['util']) {
+        case 'edit_sql': /* expose sql tables via ajax #NoRagrets2012 */
+            if(Util::getCUser()['rank'] >= 1) {
+                $database->update($_POST['attr']['table'], [$_POST['attr']['column'] => $_POST['attr']['new']],
+                    ['id' => $_POST['attr']['id']]);
+            }
+            break;
         case 'cal_events':
             echo Util::getCalEvents();
             break;
