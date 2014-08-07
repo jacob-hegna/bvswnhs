@@ -4,7 +4,8 @@ $(".table-editable").on("click", function(e) {
         $(this).html($("#editable-template").html());
     }
 });
-$(document).delegate("#editable-submit", "click", function() {
+$(document).delegate("#editable-submit", "click", function(e) {
+    e.preventDefault();
     var url  = $.url();
     $.ajax({
         type: "post",

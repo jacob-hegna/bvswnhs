@@ -3,12 +3,12 @@ function getMembers() {
     global $database;
     $page = '
 <div id="editable-template" style="display:none">
-    <div class="input-group" style="width:auto">
+    <form class="input-group" style="width:auto">
         <input class="form-control" autofocus>
         <span class="input-group-btn">
             <button id="editable-submit" class="btn btn-default" type="submit" type="button">Submit</button>
         </span>
-    </div>
+    </form>
 </div>
 <script src="/js/edit-table.js"></script>
 <h1 style="text-align: center">Members</h1>
