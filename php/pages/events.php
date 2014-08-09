@@ -32,7 +32,7 @@ initMemberCtrls();
         <th width="20%">Name</th>
         <th width="20%">Hours</th>
         <th width="20%">Date</th>
-        <th width="20%">MaxMembers</th>' . (Util::getCUser()['rank'] >= 1 ?
+        <th width="20%">Current Availability</th>' . (Util::getCUser()['rank'] >= 1 ?
         '<th width="20%"><button id="admin" class="btn btn-primary btn-sm form-control">Admin <i class="fa fa-pencil-square"></i></button></th>':'') .
     '</thead>
     <tbody>';
