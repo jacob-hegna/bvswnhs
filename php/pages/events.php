@@ -3,6 +3,34 @@ function getEvents() {
     global $database;
     $page = '
 <script>
+
+function loadEventTab(name) {
+    if(name == undefined) {
+        return;
+    }
+    $("tbody > tr:not(#new-event-row)").each(function() {
+        var eleid = $(this).find("td").find("button").attr("id");
+        var elename = $("#name", this).text().trim();
+        elename = elename.replace(/ /g, "-");
+        if(name == elename) {
+            $.ajax({
+                type: "post",
+                url: "/php/main.php",
+                data: {
+                    page: "events",
+                    attr: {
+                        id: eleid
+                    }
+                }
+            }).done(function(data) {
+                $("#main").html(data);
+            });
+        }
+    });
+}
+
+loadEventTab($.url().segment(2));
+
 initMemberCtrls = function() {
     $(".act-on-event").text("Join");
     $("#new-event-row").hide();
@@ -39,11 +67,11 @@ initMemberCtrls();
 
     foreach($database->select('events', '*') as $i) {
         $page .= '
-        <tr>
-            <td id="'.$i['id'].'" class="table-editable">' . (Util::inEvent($i['id']) ? '<span class="badge alert-success"><span class="fa fa-check"></span></span>' : '') . $i['name'] . '</td>
-            <td id="'.$i['id'].'" class="table-editable">' . $i['hours']  . '</td>
-            <td id="'.$i['id'].'" class="table-editable">' . $i['date'] . '</td>
-            <td id="'.$i['id'].'" class="table-editable">' . (Util::isFull($i['id']) ? 'Full' : count(json_decode($i['members'])) . ' / ' . $i['maxmembers']) . '</td>
+        <tr id="'.$i['id'].'">
+            <td id="name" class="table-editable">' . $i['name'] . (Util::inEvent($i['id']) ? ' <span class="badge alert-success"><span class="fa fa-check"></span></span>' : '') . '</td>
+            <td class="table-editable">' . $i['hours']  . '</td>
+            <td class="table-editable">' . $i['date'] . '</td>
+            <td class="table-editable">' . (Util::isFull($i['id']) ? 'Full' : count(json_decode($i['members'])) . ' / ' . $i['maxmembers']) . '</td>
             <td><button id="'.$i['id'].'" class="act-on-event btn btn-danger btn-sm form-control">Join</button></td>
         </tr>';
     }
@@ -109,17 +137,21 @@ $("#add-event").on("click", function(e) {
 $("tbody > tr:not(#new-event-row)").each(function() {
     $(this).on("click", function(e) {
         e.preventDefault();
+        var eleid = $(this).find("td").find("button").attr("id");
+        var name = $("#name", this).text().trim();
+        name = name.replace(/ /g, "-");
         $.ajax({
             type: "post",
             url: "/php/main.php",
             data: {
                 page: "events",
                 attr: {
-                    id: $(this).find("td").find("button").attr("id")
+                    id: eleid
                 }
             }
         }).done(function(data) {
             $("#main").html(data);
+            history.pushState({}, "", "/events/" + name + "/");
         });
     });
 });
