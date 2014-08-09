@@ -5,12 +5,9 @@ function getEvents() {
 <script>
 
 function loadEventTab(name) {
-    if(name == undefined) {
-        return;
-    }
     $("tbody > tr:not(#new-event-row)").each(function() {
         var eleid = $(this).find("td").find("button").attr("id");
-        var elename = $("#name", this).text().trim();
+        var elename = $("#name", this).text().trim().toLowerCase();
         elename = elename.replace(/ /g, "-");
         if(name == elename) {
             $.ajax({
@@ -28,8 +25,9 @@ function loadEventTab(name) {
         }
     });
 }
-
-loadEventTab($.url().segment(2));
+if($.url().segment(2) != undefined) {
+    loadEventTab($.url().segment(2).toLowerCase());
+}
 
 initMemberCtrls = function() {
     $(".act-on-event").text("Join");
@@ -138,7 +136,7 @@ $("tbody > tr:not(#new-event-row)").each(function() {
     $(this).on("click", function(e) {
         e.preventDefault();
         var eleid = $(this).find("td").find("button").attr("id");
-        var name = $("#name", this).text().trim();
+        var name = $("#name", this).text().trim().toLowerCase();
         name = name.replace(/ /g, "-");
         $.ajax({
             type: "post",
