@@ -61,8 +61,9 @@ CREATE TABLE IF NOT EXISTS `meetings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-
 INSERT INTO `bvswnhs`.`members` (`id`, `name`, `email`, `phone`, `bvid`, `hours`, `rank`, `events`) VALUES (NULL, 'Root User', 'example@bluevalleyk12.net', '5555555555', '12345678', '0', '2', '[]');
+INSERT INTO `bvswnhs`.`members` (`id`, `name`, `email`, `phone`, `bvid`, `hours`, `rank`, `events`) VALUES (NULL, 'Wes Caldwell', 'wcaldwell.email@gmail.com', '9137317023', '10033877', '0', '2', '[]');
+INSERT INTO `bvswnhs`.`members` (`id`, `name`, `email`, `phone`, `bvid`, `hours`, `rank`, `events`) VALUES (NULL, 'Jacob Hegna', 'jacobhegna@gmail.com', '9139450706', '10055451', '0', '2', '[]');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

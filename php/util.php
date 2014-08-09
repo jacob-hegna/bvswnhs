@@ -95,7 +95,7 @@ class Util {
         if(!in_array($id, $events)) { //Only if not already subscribed
             $members = json_decode($database->get('events', 'members', ['id' => $id]));
             if(count($members) < $database->get('events', 'maxmembers', ['id' => $id])) {
-                $members[] = $_SESSION['bvid'];
+                $members[] = Util::getCUser()['id'];
                 $events[] = $id;
                 $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
                 $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
