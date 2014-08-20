@@ -103,6 +103,20 @@ class Util {
         }
     }
 
+    public static function leaveEvent($id) {
+        global $database;
+        $events = json_decode(Util::getCUser()['events']);
+        if(in_array($id, $events)) { //Only if already subscribed
+            $members = json_decode($database->get('events', 'members', ['id' => $id]));
+            if(count($members) < $database->get('events', 'maxmembers', ['id' => $id])) {
+                unset($members[array_search(Util::getCUser()['id'], $members)]);
+                unset($events[array_search($id, $events)]);
+                $database->update('members', ['events' => json_encode($events)], ['bvid' => $_SESSION['bvid']]);
+                $database->update('events', ['members' => json_encode($members)], ['id' => $id]);
+            }
+        }
+    }
+
     public static function inEvent($id) {
         global $database;
         $events = json_decode(Util::getCUser()['events']);

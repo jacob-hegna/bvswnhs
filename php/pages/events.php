@@ -30,7 +30,11 @@ if($.url().segment(2) != undefined) {
 }
 
 initMemberCtrls = function() {
-    $(".act-on-event").text("Join");
+    var events = ' . Util::getCUser()['events'] . ';
+    $(".act-on-event").each(function() {
+        $(this).text($.inArray($(this).attr("id").toString(), events) < 0 ? "Join" : "Leave");
+        console.log($.inArray($(this).attr("id").toString(), events));
+    });
     $("#new-event-row").hide();
     $(".act-on-event").unbind();
     $(".act-on-event").on("click", function(e) {
