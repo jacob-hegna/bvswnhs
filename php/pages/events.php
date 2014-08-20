@@ -32,25 +32,26 @@ if($.url().segment(2) != undefined) {
 initMemberCtrls = function() {
     var events = ' . Util::getCUser()['events'] . ';
     $(".act-on-event").each(function() {
-        $(this).text($.inArray($(this).attr("id").toString(), events) < 0 ? "Join" : "Leave");
-        console.log($.inArray($(this).attr("id").toString(), events));
+        $(this).text($.inArray($(this).attr("id"), events) < 0 ? "Join" : "Leave");
     });
     $("#new-event-row").hide();
     $(".act-on-event").unbind();
-    $(".act-on-event").on("click", function(e) {
-        e.preventDefault();
-        eleid = $(this).attr("id");
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                util: "join_event",
-                attr: {
-                    id: eleid,
+    $(".act-on-event").each(function() {
+        $(this).on("click", function(e) {
+            e.preventDefault();
+            eleid = $(this).attr("id");
+            $.ajax({
+                type: "post",
+                url: "/php/main.php",
+                data: {
+                    util: $.inArray(eleid, events) < 0 ? "join_event" : "leave_event",
+                    attr: {
+                        id: eleid,
+                    }
                 }
-            }
-        }).done(function(data) {
-            loadTab("events");
+            }).done(function(data) {
+                loadTab("events");
+            });
         });
     });
 }
