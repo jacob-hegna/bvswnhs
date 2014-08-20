@@ -4,12 +4,17 @@ function getSpecificEvent($eventid) {
     global $database;
     $event = $database->get('events', '*', ['id' => $eventid]);
     $page .= '
+<div id="textbox" class="hidden">
+        <textarea class="form-control" rows="15" id="description-box" name="description" placeholder="Write the description of the event here"></textarea>
+        <button id="description-submit" class="btn btn-default form-control">Submit</button>
+</div>
+<div id="id" class="hidden">'.$event['id'].'</div>
 <div class="container">
     <div class="page-header">
         <h2>' . $event['name'] . ' <small> ' . date("l, F j, Y", strtotime($event['date'])) . '</small></h2>
     </div>
-    <div class="col-md-6">
-        <p class="lead">Synth selvage Shoreditch tousled, Austin keffiyeh Wes Anderson quinoa small batch fanny pack retro fixie master cleanse. Authentic squid brunch Kickstarter, asymmetrical iPhone church-key put a bird on it umami fingerstache post-ironic pickled irony artisan. Blue Bottle +1 squid crucifix, Tumblr fashion axe seitan Williamsburg kitsch McSweeney\'s. Wayfarers fixie retro American Apparel, jean shorts photo booth letterpress 8-bit church-key Tonx Pinterest blog Schlitz raw denim. Hella pour-over authentic tousled before they sold out put a bird on it. PBR Wes Anderson 3 wolf moon fanny pack mumblecore. Pinterest single-origin coffee Tumblr you probably haven\'t heard of them, hella Marfa Kickstarter keytar put a bird on it Etsy food truck brunch.</p>
+    <div id="description-col" class="col-md-6">
+        <p id="description" class="lead">'.$event['description'].'</p>
     </div>
     <div class="col-md-6">
         <div>
@@ -28,6 +33,28 @@ function getSpecificEvent($eventid) {
             </ul>
         </div>
     </div>
+    <script>
+$("#description").on("click", function(e) {
+    e.preventDefault();
+    $(this).parent().html($("#textbox").html());
+});
+$("#description-col").on("click", "#description-submit", function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "post",
+        url: "/php/main.php",
+        data: {
+            util: "edit_event_description",
+            attr: {
+                id: $("#id").html(),
+                description: $("#description-col > #description-box").val()
+            }
+        }
+    }).done(function(data) {
+        $("#main").html(data);
+    });
+});
+    </script>
 </div>';
     Page::write($page);
 }

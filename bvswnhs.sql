@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `name` varchar(25) NOT NULL,
   `hours` varchar(2) NOT NULL,
   `date` date NOT NULL,
+  `description` varchar(180) NOT NULL,
   `maxmembers` int(3) NOT NULL,
   `members` varchar(512) NOT NULL DEFAULT '[]',
   PRIMARY KEY (`id`)

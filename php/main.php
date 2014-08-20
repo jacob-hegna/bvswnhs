@@ -103,11 +103,15 @@ if(array_key_exists('page', $_POST)) {
     }
 } else if(array_key_exists('util', $_POST)) {
     switch($_POST['util']) {
-        case 'edit_sql': /* expose sql tables via ajax #NoRagrets2012 */
+        case 'edit_sql': /* expose sql tables via ajax #NoRagrets2012 */ /* depreciated */
             if(Util::getCUser()['rank'] >= 1) {
                 $database->update($_POST['attr']['table'], [$_POST['attr']['column'] => $_POST['attr']['new']],
                     ['id' => $_POST['attr']['id']]);
             }
+            break;
+        case 'edit_event_description':
+            $database->update('events', ['description' => $_POST['attr']['description']], ['id' => $_POST['attr']['id']]);
+            getEvents();
             break;
         case 'cal_events':
             echo Util::getCalEvents();
