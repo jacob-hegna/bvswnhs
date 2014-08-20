@@ -139,6 +139,9 @@ if(array_key_exists('page', $_POST)) {
         case 'join_event':
             Util::joinEvent($_POST['attr']['id']);
             break;
+        case 'leave_event':
+            Util::leaveEvent($_POST['attr']['id']);
+            break;
         case 'add_user':
             if(Util::getCUser()['rank'] >= 1) {
                 Util::addUser($_POST['attr']);
