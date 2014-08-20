@@ -56,6 +56,27 @@ initMemberCtrls = function() {
     });
 }
 initMemberCtrls();
+$("tbody > tr:not(#new-event-row)").each(function() {
+    $(this).on("click", function(e) {
+        e.preventDefault();
+        var eleid = $(this).find("td").find("button").attr("id");
+        var name = $("#name", this).text().trim().toLowerCase();
+        name = name.replace(/ /g, "-");
+        $.ajax({
+            type: "post",
+            url: "/php/main.php",
+            data: {
+                page: "events",
+                attr: {
+                    id: eleid
+                }
+            }
+        }).done(function(data) {
+            $("#main").html(data);
+            history.pushState({}, "", "/events/" + name + "/");
+        });
+    });
+});
 </script>
 <table class="table table-hover" style="margin-top: 50px; text-align: left; font-size: medium;">
 <h1 style="text-align: center">Events</h1>
@@ -135,27 +156,6 @@ $("#add-event").on("click", function(e) {
         }
     }).done(function(data) {
         loadTab("events");
-    });
-});
-$("tbody > tr:not(#new-event-row)").each(function() {
-    $(this).on("click", function(e) {
-        e.preventDefault();
-        var eleid = $(this).find("td").find("button").attr("id");
-        var name = $("#name", this).text().trim().toLowerCase();
-        name = name.replace(/ /g, "-");
-        $.ajax({
-            type: "post",
-            url: "/php/main.php",
-            data: {
-                page: "events",
-                attr: {
-                    id: eleid
-                }
-            }
-        }).done(function(data) {
-            $("#main").html(data);
-            history.pushState({}, "", "/events/" + name + "/");
-        });
     });
 });
         </script>';

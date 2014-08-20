@@ -110,7 +110,9 @@ if(array_key_exists('page', $_POST)) {
             }
             break;
         case 'edit_event_description':
-            $database->update('events', ['description' => $_POST['attr']['description']], ['id' => $_POST['attr']['id']]);
+            if(Util::getCUser()['rank'] >= 1) {
+                $database->update('events', ['description' => $_POST['attr']['description']], ['id' => $_POST['attr']['id']]);
+            }
             getEvents();
             break;
         case 'cal_events':

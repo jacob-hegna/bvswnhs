@@ -5,8 +5,8 @@ function getSpecificEvent($eventid) {
     $event = $database->get('events', '*', ['id' => $eventid]);
     $page .= '
 <div id="textbox" class="hidden">
-        <textarea class="form-control" rows="15" id="description-box" name="description" placeholder="Write the description of the event here"></textarea>
-        <button id="description-submit" class="btn btn-default form-control">Submit</button>
+    <textarea class="form-control" rows="15" id="description-box" name="description" placeholder="Write the description of the event here"></textarea>
+    <button id="description-submit" class="btn btn-default form-control">Submit</button>
 </div>
 <div id="id" class="hidden">'.$event['id'].'</div>
 <div class="container">
@@ -32,7 +32,9 @@ function getSpecificEvent($eventid) {
     $page .= '
             </ul>
         </div>
-    </div>
+    </div>';
+    if(Util::getCUser()['rank'] >= 1) {
+        $page .= '
     <script>
 $("#description").on("click", function(e) {
     e.preventDefault();
@@ -53,7 +55,9 @@ $("#description-col").on("click", "#description-submit", function(e) {
     }).done(function(data) {
         $("#main").html(data);
     });
-});
+});';
+    }
+    $page .= '
     </script>
 </div>';
     Page::write($page);

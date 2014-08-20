@@ -62,7 +62,8 @@ class Util {
             'name' => $attr['name'],
             'hours' => $attr['hours'],
             'date' => $attr['date'],
-            'maxmembers' => $attr['maxmembers']
+            'maxmembers' => $attr['maxmembers'],
+            'description' => 'The admins haven\' added a description for this event yet :('
         ]);
     }
 
