@@ -43,7 +43,7 @@ function getHome() {
 <form>
     <div id="hour-form" class="input-group input-group-lg">
         <span class="input-group-addon hidden-xs">Student ID</span>
-        <input id="bvid" class="form-control" autofocus>
+        <input id="bvid" class="form-control" type="password" autofocus>
         <span class="input-group-btn">
             <button id="hours-submit" class="btn btn-default" type="submit" type="button">Login <i class="fa fa-sign-in"></i></button>
         </span>
